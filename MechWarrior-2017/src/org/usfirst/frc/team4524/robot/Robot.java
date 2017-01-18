@@ -49,6 +49,10 @@ public class Robot extends SampleRobot {
 		chooser.addDefault("Default Auto", defaultAuto);
 		chooser.addObject("My Auto", customAuto);
 		SmartDashboard.putData("Auto modes", chooser);
+		System.out.println("This is the official code for MechWarriors-2017");
+		System.out.println("Initializing...");
+
+
 	}
 
 	/**
