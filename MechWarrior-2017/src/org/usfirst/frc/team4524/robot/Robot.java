@@ -9,6 +9,7 @@ import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -31,7 +32,7 @@ public class Robot extends IterativeRobot {
 	RobotDrive myRobot = new RobotDrive(0, 1);
 	Joystick stick = new Joystick(0);
 	Timer timer = new Timer();
-
+	Encoder sampleEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -39,6 +40,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		System.out.println("Official code for the MechWarrior 2017 FRC robot");
 		chooser.addDefault("Default Auto", defaultAuto);
 		chooser.addObject("My Auto", customAuto);
 		SmartDashboard.putData("Auto choices", chooser);
@@ -61,7 +63,7 @@ public class Robot extends IterativeRobot {
 			// deploying.
 			while (!Thread.interrupted()) {
 				// Tell the CvSink to grab a frame from the camera and put it
-				// in the source mat.  If there is an error notify the output.
+				// in the source mat. If there is an error notify the output.
 				if (cvSink.grabFrame(mat) == 0) {
 					// Send the output the error.
 					outputStream.notifyError(cvSink.getError());
@@ -69,8 +71,7 @@ public class Robot extends IterativeRobot {
 					continue;
 				}
 				// Put a rectangle on the image
-				Imgproc.rectangle(mat, new Point(100, 100), new Point(400, 400),
-						new Scalar(255, 255, 255), 5);
+				Imgproc.rectangle(mat, new Point(100, 100), new Point(400, 400), new Scalar(255, 255, 255), 5);
 				// Give the output stream a new image to display
 				outputStream.putFrame(mat);
 			}
@@ -96,6 +97,12 @@ public class Robot extends IterativeRobot {
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
 		System.out.println("Auto selected: " + autoSelected);
+		sampleEncoder.reset();
+		sampleEncoder.setMaxPeriod(.1);
+		sampleEncoder.setMinRate(10);
+		sampleEncoder.setDistancePerPulse(5);
+		sampleEncoder.setReverseDirection(true);
+		sampleEncoder.setSamplesToAverage(7);
 	}
 
 	/**
@@ -108,7 +115,7 @@ public class Robot extends IterativeRobot {
 			myRobot.setSafetyEnabled(false);
 			myRobot.drive(-0.5, 1.0); // spin at half speed
 			Timer.delay(2.0); // for 2 seconds
-			myRobot.drive(0.0, 0.0); // stop robot			break;
+			myRobot.drive(0.0, 0.0); // stop robot break;
 		case defaultAuto:
 		default:
 			myRobot.setSafetyEnabled(false);
@@ -117,15 +124,53 @@ public class Robot extends IterativeRobot {
 			myRobot.drive(0.0, 0.0); // stop robot
 			break;
 		}
+		int count = sampleEncoder.get();
+		System.out.println("Encoder count: " + count);
+		double distance = sampleEncoder.getRaw();
+		System.out.println("Encoder distance (getRaw): " + distance);
+		distance = sampleEncoder.getDistance();
+		System.out.println("Encoder distance (getDistance): " + distance);
+		double period = sampleEncoder.getPeriod();
+		System.out.println("Encoder period: " + period);
+		double rate = sampleEncoder.getRate();
+		System.out.println("Encoder rate: " + rate);
+		boolean direction = sampleEncoder.getDirection();
+		System.out.println("Encoder direction: " + direction);
+		boolean stopped = sampleEncoder.getStopped();
+		System.out.println("Encoder stopped: " + stopped);
+	}
+
+	public void teleopInit() {
+		sampleEncoder.reset();
+		sampleEncoder.setMaxPeriod(.1);
+		sampleEncoder.setMinRate(10);
+		sampleEncoder.setDistancePerPulse(5);
+		sampleEncoder.setReverseDirection(true);
+		sampleEncoder.setSamplesToAverage(7);
+
 	}
 
 	/**
-	 * This function is called periodically during operator control
+	 * } This function is called periodically during operator control
 	 */
 	@Override
 	public void teleopPeriodic() {
 		myRobot.arcadeDrive(stick);
-}
+		int count = sampleEncoder.get();
+		System.out.println("Encoder count: " + count);
+		double distance = sampleEncoder.getRaw();
+		System.out.println("Encoder distance (getRaw): " + distance);
+		distance = sampleEncoder.getDistance();
+		System.out.println("Encoder distance (getDistance): " + distance);
+		double period = sampleEncoder.getPeriod();
+		System.out.println("Encoder period: " + period);
+		double rate = sampleEncoder.getRate();
+		System.out.println("Encoder rate: " + rate);
+		boolean direction = sampleEncoder.getDirection();
+		System.out.println("Encoder direction: " + direction);
+		boolean stopped = sampleEncoder.getStopped();
+		System.out.println("Encoder stopped: " + stopped);
+	}
 
 	/**
 	 * This function is called periodically during test mode
@@ -134,4 +179,3 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 	}
 }
-
