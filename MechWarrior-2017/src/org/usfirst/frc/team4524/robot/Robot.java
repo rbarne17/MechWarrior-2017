@@ -97,6 +97,20 @@ public class Robot extends IterativeRobot {
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
 		System.out.println("Auto selected: " + autoSelected);
+		int count = sampleEncoder.get();
+		System.out.println("Encoder count: " + count);
+		double distance = sampleEncoder.getRaw();
+		System.out.println("Encoder distance (getRaw): " + distance);
+		distance = sampleEncoder.getDistance();
+		System.out.println("Encoder distance (getDistance): " + distance);
+		double period = sampleEncoder.getPeriod();
+		System.out.println("Encoder period: " + period);
+		double rate = sampleEncoder.getRate();
+		System.out.println("Encoder rate: " + rate);
+		boolean direction = sampleEncoder.getDirection();
+		System.out.println("Encoder direction: " + direction);
+		boolean stopped = sampleEncoder.getStopped();
+		System.out.println("Encoder stopped: " + stopped);
 		sampleEncoder.reset();
 		sampleEncoder.setMaxPeriod(.1);
 		sampleEncoder.setMinRate(10);
@@ -124,6 +138,10 @@ public class Robot extends IterativeRobot {
 			myRobot.drive(0.0, 0.0); // stop robot
 			break;
 		}
+
+	}
+
+	public void teleopInit() {
 		int count = sampleEncoder.get();
 		System.out.println("Encoder count: " + count);
 		double distance = sampleEncoder.getRaw();
@@ -138,9 +156,6 @@ public class Robot extends IterativeRobot {
 		System.out.println("Encoder direction: " + direction);
 		boolean stopped = sampleEncoder.getStopped();
 		System.out.println("Encoder stopped: " + stopped);
-	}
-
-	public void teleopInit() {
 		sampleEncoder.reset();
 		sampleEncoder.setMaxPeriod(.1);
 		sampleEncoder.setMinRate(10);
@@ -156,20 +171,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		myRobot.arcadeDrive(stick);
-		int count = sampleEncoder.get();
-		System.out.println("Encoder count: " + count);
-		double distance = sampleEncoder.getRaw();
-		System.out.println("Encoder distance (getRaw): " + distance);
-		distance = sampleEncoder.getDistance();
-		System.out.println("Encoder distance (getDistance): " + distance);
-		double period = sampleEncoder.getPeriod();
-		System.out.println("Encoder period: " + period);
-		double rate = sampleEncoder.getRate();
-		System.out.println("Encoder rate: " + rate);
-		boolean direction = sampleEncoder.getDirection();
-		System.out.println("Encoder direction: " + direction);
-		boolean stopped = sampleEncoder.getStopped();
-		System.out.println("Encoder stopped: " + stopped);
 	}
 
 	/**
