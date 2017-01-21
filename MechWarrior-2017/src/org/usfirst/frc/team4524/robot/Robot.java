@@ -96,21 +96,6 @@ public class Robot extends IterativeRobot {
 		autoSelected = chooser.getSelected();
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
-		System.out.println("Auto selected: " + autoSelected);
-		int count = sampleEncoder.get();
-		System.out.println("Encoder count: " + count);
-		double distance = sampleEncoder.getRaw();
-		System.out.println("Encoder distance (getRaw): " + distance);
-		distance = sampleEncoder.getDistance();
-		System.out.println("Encoder distance (getDistance): " + distance);
-		double period = sampleEncoder.getPeriod();
-		System.out.println("Encoder period: " + period);
-		double rate = sampleEncoder.getRate();
-		System.out.println("Encoder rate: " + rate);
-		boolean direction = sampleEncoder.getDirection();
-		System.out.println("Encoder direction: " + direction);
-		boolean stopped = sampleEncoder.getStopped();
-		System.out.println("Encoder stopped: " + stopped);
 		sampleEncoder.reset();
 		sampleEncoder.setMaxPeriod(.1);
 		sampleEncoder.setMinRate(10);
@@ -128,13 +113,13 @@ public class Robot extends IterativeRobot {
 		case customAuto:
 			myRobot.setSafetyEnabled(false);
 			myRobot.drive(-0.5, 1.0); // spin at half speed
-			Timer.delay(2.0); // for 2 seconds
+			Timer.delay(.5); // for 2 seconds
 			myRobot.drive(0.0, 0.0); // stop robot break;
 		case defaultAuto:
 		default:
 			myRobot.setSafetyEnabled(false);
 			myRobot.drive(-0.5, 0.0); // drive forwards half speed
-			Timer.delay(2.0); // for 2 seconds
+			Timer.delay(.5); // for 2 seconds
 			myRobot.drive(0.0, 0.0); // stop robot
 			break;
 		}
@@ -142,20 +127,6 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void teleopInit() {
-		int count = sampleEncoder.get();
-		System.out.println("Encoder count: " + count);
-		double distance = sampleEncoder.getRaw();
-		System.out.println("Encoder distance (getRaw): " + distance);
-		distance = sampleEncoder.getDistance();
-		System.out.println("Encoder distance (getDistance): " + distance);
-		double period = sampleEncoder.getPeriod();
-		System.out.println("Encoder period: " + period);
-		double rate = sampleEncoder.getRate();
-		System.out.println("Encoder rate: " + rate);
-		boolean direction = sampleEncoder.getDirection();
-		System.out.println("Encoder direction: " + direction);
-		boolean stopped = sampleEncoder.getStopped();
-		System.out.println("Encoder stopped: " + stopped);
 		sampleEncoder.reset();
 		sampleEncoder.setMaxPeriod(.1);
 		sampleEncoder.setMinRate(10);
@@ -170,6 +141,13 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		SmartDashboard.putNumber("Encoder Count", sampleEncoder.get());
+		SmartDashboard.putNumber("Encoder Raw", sampleEncoder.getRaw());
+		SmartDashboard.putNumber("Encoder Distance", sampleEncoder.getDistance());
+		SmartDashboard.putNumber("Encoder Period", sampleEncoder.getPeriod());
+		SmartDashboard.putNumber("Encoder Rate", sampleEncoder.getRate());
+		SmartDashboard.putBoolean("Encoder Direction", sampleEncoder.getDirection());
+		SmartDashboard.putBoolean("Encoder Direction", sampleEncoder.getStopped());
 		myRobot.arcadeDrive(stick);
 	}
 
