@@ -33,6 +33,11 @@ public class Robot extends IterativeRobot {
 	Joystick stick = new Joystick(0);
 	Timer timer = new Timer();
 	Encoder sampleEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+	public static final double WHEEL_DIAMETER = 6;
+	public static final double PULSE_PER_REVOLUTION = 360;
+	public static final double ENCODER_GEAR_RATIO = 0;
+	public static final double GEAR_RATIO = 8.45 / 1;
+	public static final double FUDGE_FACTOR = 1.0;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -97,11 +102,10 @@ public class Robot extends IterativeRobot {
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
 		sampleEncoder.reset();
-		sampleEncoder.setMaxPeriod(.1);
-		sampleEncoder.setMinRate(10);
-		sampleEncoder.setDistancePerPulse(5);
-		sampleEncoder.setReverseDirection(true);
-		sampleEncoder.setSamplesToAverage(7);
+		final double distancePerPulse = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION / ENCODER_GEAR_RATIO
+				/ GEAR_RATIO * FUDGE_FACTOR;
+		sampleEncoder.setDistancePerPulse(distancePerPulse);
+
 	}
 
 	/**
