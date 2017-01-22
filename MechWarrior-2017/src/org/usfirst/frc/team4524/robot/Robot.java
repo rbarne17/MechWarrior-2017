@@ -83,6 +83,10 @@ public class Robot extends IterativeRobot {
 		});
 		visionThread.setDaemon(true);
 		visionThread.start();
+		final double distancePerPulse = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION / ENCODER_GEAR_RATIO
+				/ GEAR_RATIO * FUDGE_FACTOR;
+		sampleEncoder.setDistancePerPulse(distancePerPulse);
+
 	}
 
 	/**
@@ -102,9 +106,6 @@ public class Robot extends IterativeRobot {
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
 		sampleEncoder.reset();
-		final double distancePerPulse = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION / ENCODER_GEAR_RATIO
-				/ GEAR_RATIO * FUDGE_FACTOR;
-		sampleEncoder.setDistancePerPulse(distancePerPulse);
 
 	}
 
@@ -113,6 +114,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		double encoderDistanceReading = sampleEncoder.getDistance();
+		SmartDashboard.putNumber("encoder reading", encoderDistanceReading);
 		switch (autoSelected) {
 		case customAuto:
 			myRobot.setSafetyEnabled(false);
@@ -132,11 +135,6 @@ public class Robot extends IterativeRobot {
 
 	public void teleopInit() {
 		sampleEncoder.reset();
-		sampleEncoder.setMaxPeriod(.1);
-		sampleEncoder.setMinRate(10);
-		sampleEncoder.setDistancePerPulse(5);
-		sampleEncoder.setReverseDirection(true);
-		sampleEncoder.setSamplesToAverage(7);
 
 	}
 
@@ -145,13 +143,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		SmartDashboard.putNumber("Encoder Count", sampleEncoder.get());
-		SmartDashboard.putNumber("Encoder Raw", sampleEncoder.getRaw());
-		SmartDashboard.putNumber("Encoder Distance", sampleEncoder.getDistance());
-		SmartDashboard.putNumber("Encoder Period", sampleEncoder.getPeriod());
-		SmartDashboard.putNumber("Encoder Rate", sampleEncoder.getRate());
-		SmartDashboard.putBoolean("Encoder Direction", sampleEncoder.getDirection());
-		SmartDashboard.putBoolean("Encoder Direction", sampleEncoder.getStopped());
+		double encoderDistanceReading = sampleEncoder.getDistance();
+		SmartDashboard.putNumber("encoder reading", encoderDistanceReading);
 		myRobot.arcadeDrive(stick);
 	}
 
