@@ -35,8 +35,8 @@ public class Robot extends IterativeRobot {
 	Encoder sampleEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
 	public static final double WHEEL_DIAMETER = 6;
 	public static final double PULSE_PER_REVOLUTION = 360;
-	public static final double ENCODER_GEAR_RATIO = 0;
-	public static final double GEAR_RATIO = 8.45 / 1;
+	public static final double ENCODER_GEAR_RATIO = 1;
+	public static final double GEAR_RATIO = 10.71 / 1;
 	public static final double FUDGE_FACTOR = 1.0;
 
 	/**
@@ -86,6 +86,8 @@ public class Robot extends IterativeRobot {
 		final double distancePerPulse = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION / ENCODER_GEAR_RATIO
 				/ GEAR_RATIO * FUDGE_FACTOR;
 		sampleEncoder.setDistancePerPulse(distancePerPulse);
+		System.out.println("Distance per pulse: " + distancePerPulse);
+		
 
 	}
 
@@ -105,7 +107,7 @@ public class Robot extends IterativeRobot {
 		autoSelected = chooser.getSelected();
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
-		sampleEncoder.reset();
+//		sampleEncoder.reset();
 
 	}
 
@@ -134,7 +136,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void teleopInit() {
-		sampleEncoder.reset();
+//		sampleEncoder.reset();
 
 	}
 
