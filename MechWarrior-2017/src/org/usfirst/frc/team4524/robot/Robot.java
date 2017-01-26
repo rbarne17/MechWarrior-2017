@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -32,7 +33,7 @@ public class Robot extends IterativeRobot {
 	RobotDrive myRobot = new RobotDrive(0, 1);
 	Joystick stick = new Joystick(0);
 	Timer timer = new Timer();
-	Encoder sampleEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+	Encoder sampleEncoder = new Encoder(1, 2, true, EncodingType.k4X);
 	public static final double WHEEL_DIAMETER = 6;
 	public static final double PULSE_PER_REVOLUTION = 360;
 	public static final double ENCODER_GEAR_RATIO = 1;
@@ -87,7 +88,6 @@ public class Robot extends IterativeRobot {
 				/ GEAR_RATIO * FUDGE_FACTOR;
 		sampleEncoder.setDistancePerPulse(distancePerPulse);
 		System.out.println("Distance per pulse: " + distancePerPulse);
-		
 
 	}
 
@@ -107,7 +107,7 @@ public class Robot extends IterativeRobot {
 		autoSelected = chooser.getSelected();
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
-//		sampleEncoder.reset();
+		sampleEncoder.reset();
 
 	}
 
@@ -126,17 +126,19 @@ public class Robot extends IterativeRobot {
 			myRobot.drive(0.0, 0.0); // stop robot break;
 		case defaultAuto:
 		default:
-			myRobot.setSafetyEnabled(false);
-			myRobot.drive(-0.5, 0.0); // drive forwards half speed
-			Timer.delay(.5); // for 2 seconds
-			myRobot.drive(0.0, 0.0); // stop robot
-			break;
+			if (encoderDistanceReading < 5.0) {
+				myRobot.setSafetyEnabled(false);
+				myRobot.drive(-0.5, 0.0); // drive forwards half speed
+				Timer.delay(.5); // for 2 seconds
+				myRobot.drive(0.0, 0.0); // stop robot
+				break;
+			}
 		}
 
 	}
 
 	public void teleopInit() {
-//		sampleEncoder.reset();
+		sampleEncoder.reset();
 
 	}
 
