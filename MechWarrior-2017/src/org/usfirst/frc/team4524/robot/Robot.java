@@ -26,8 +26,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	final String defaultAuto = "Default";
-	final String customAuto = "My Auto";
+	final String path1a = "Path 1a";
+	final String path1b = "Path 1b";
+	final String path1c = "Path 1c";
+	final String path2a = "Path 2a";
+	final String path2b = "Path 2b";
+	final String path2c = "Path 2c";
+	final String path3a = "Path 3a";
+	final String path3b = "Path 3b";
+	final String path3c = "Path 3c";
 	String autoSelected;
 	SendableChooser<String> chooser = new SendableChooser<>();
 	RobotDrive myRobot = new RobotDrive(0, 1);
@@ -47,8 +54,15 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		System.out.println("Official code for the MechWarrior 2017 FRC robot");
-		chooser.addDefault("Default Auto", defaultAuto);
-		chooser.addObject("My Auto", customAuto);
+		chooser.addDefault("path1a", path1a);
+		chooser.addObject("path1b", path1b);
+		chooser.addObject("path1c", path1c);
+		chooser.addObject(path2a, path2a);
+		chooser.addObject(path2b, path2b);
+		chooser.addObject(path2c, path2c);
+		chooser.addObject(path3a, path3a);
+		chooser.addObject(path3b, path3b);
+		chooser.addObject(path3c, path3c);
 		SmartDashboard.putData("Auto choices", chooser);
 		Thread visionThread = new Thread(() -> {
 			// Get the UsbCamera from CameraServer
@@ -119,12 +133,27 @@ public class Robot extends IterativeRobot {
 		double encoderDistanceReading = sampleEncoder.getDistance();
 		SmartDashboard.putNumber("encoder reading", encoderDistanceReading);
 		switch (autoSelected) {
-		case customAuto:
+		case path1a:
 			myRobot.setSafetyEnabled(false);
 			myRobot.drive(-0.5, 1.0); // spin at half speed
 			Timer.delay(.5); // for 2 seconds
 			myRobot.drive(0.0, 0.0); // stop robot break;
-		case defaultAuto:
+		case path1b:
+			System.out.println("Path 1b");
+		case path1c:
+			System.out.println("Path 1c");
+		case path2a:
+			System.out.println("Path 2a");
+		case path2b:
+			System.out.println("Path 2b");
+		case path2c:
+			System.out.println("Path 2c");
+		case path3a:
+			System.out.println("Path 3a");
+		case path3b:
+			System.out.println("Path 3b");
+		case path3c:
+			System.out.println("Path 3c");
 		default:
 			if (encoderDistanceReading < 5.0) {
 				myRobot.setSafetyEnabled(false);
