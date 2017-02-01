@@ -131,29 +131,38 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		double encoderDistanceReading = sampleEncoder.getDistance();
-		SmartDashboard.putNumber("encoder reading", encoderDistanceReading);
+		SmartDashboard.putNumber("Encoder Reading", encoderDistanceReading);
 		switch (autoSelected) {
 		case path1a:
 			myRobot.setSafetyEnabled(false);
 			myRobot.drive(-0.5, 1.0); // spin at half speed
 			Timer.delay(.5); // for 2 seconds
 			myRobot.drive(0.0, 0.0); // stop robot break;
+			break;
 		case path1b:
 			System.out.println("Path 1b");
+			break;
 		case path1c:
 			System.out.println("Path 1c");
+			break;
 		case path2a:
 			System.out.println("Path 2a");
+			break;
 		case path2b:
 			System.out.println("Path 2b");
+			break;
 		case path2c:
 			System.out.println("Path 2c");
+			break;
 		case path3a:
 			System.out.println("Path 3a");
+			break;
 		case path3b:
 			System.out.println("Path 3b");
+			break;
 		case path3c:
 			System.out.println("Path 3c");
+			break;
 		default:
 			if (encoderDistanceReading < 5.0) {
 				myRobot.setSafetyEnabled(false);
