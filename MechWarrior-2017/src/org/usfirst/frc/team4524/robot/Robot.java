@@ -40,6 +40,7 @@ public class Robot extends IterativeRobot {
 	RobotDrive myRobot = new RobotDrive(0, 1);
 	Joystick stick = new Joystick(0);
 	Timer timer = new Timer();
+	double timerCount = 0;
 	Encoder sampleEncoder = new Encoder(1, 2, true, EncodingType.k4X);
 	public static final double WHEEL_DIAMETER = 6;
 	public static final double PULSE_PER_REVOLUTION = 360;
@@ -121,6 +122,8 @@ public class Robot extends IterativeRobot {
 		autoSelected = chooser.getSelected();
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
+		timer.reset();
+		timer.start();
 		sampleEncoder.reset();
 
 	}
@@ -135,8 +138,14 @@ public class Robot extends IterativeRobot {
 		switch (autoSelected) {
 		case path1a:
 			myRobot.setSafetyEnabled(false);
-			myRobot.drive(-0.5, 1.0); // spin at half speed
-			Timer.delay(.5); // for 2 seconds
+			//drive for 2 seconds
+			timerCount = timer.get();
+			if (timerCount < 2.0){
+				myRobot.drive(-0.5, 1.0); // spin at half speed
+				Timer.delay(.5); // for 2 seconds
+			}else{
+				myRobot.drive(0.0,  0.0);//stop driving
+			}
 			myRobot.drive(0.0, 0.0); // stop robot break;
 			break;
 		case path1b:
