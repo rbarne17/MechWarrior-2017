@@ -137,16 +137,17 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Encoder Reading", encoderDistanceReading);
 		switch (autoSelected) {
 		case path1a:
-			myRobot.setSafetyEnabled(false);
-			//drive for 2 seconds
+//			myRobot.setSafetyEnabled(false);
+			// drive for 2 seconds
 			timerCount = timer.get();
-			if (timerCount < 2.0){
-				myRobot.drive(-0.5, 1.0); // spin at half speed
-				Timer.delay(.5); // for 2 seconds
-			}else{
-				myRobot.drive(0.0,  0.0);//stop driving
+			System.out.println(timerCount);
+			if (timerCount < 2.0) {
+				System.out.println("Path 1a");
+				myRobot.drive(-0.5, 0.0); // drive forwards half speed
+//				Timer.delay(.5); // for 2 seconds
+			} else {
+				myRobot.drive(0.0, 0.0);// stop driving
 			}
-			myRobot.drive(0.0, 0.0); // stop robot break;
 			break;
 		case path1b:
 			System.out.println("Path 1b");
