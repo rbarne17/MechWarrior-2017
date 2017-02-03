@@ -40,6 +40,7 @@ public class Robot extends IterativeRobot {
 	RobotDrive myRobot = new RobotDrive(0, 1);
 	Joystick stick = new Joystick(0);
 	Timer timer = new Timer();
+	double timerCount = 0;
 	Encoder sampleEncoder = new Encoder(1, 2, true, EncodingType.k4X);
 	public static final double WHEEL_DIAMETER = 6;
 	public static final double PULSE_PER_REVOLUTION = 360;
@@ -121,6 +122,8 @@ public class Robot extends IterativeRobot {
 		autoSelected = chooser.getSelected();
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
+		timer.reset();
+		timer.start();
 		sampleEncoder.reset();
 
 	}
@@ -131,29 +134,45 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		double encoderDistanceReading = sampleEncoder.getDistance();
-		SmartDashboard.putNumber("encoder reading", encoderDistanceReading);
+		SmartDashboard.putNumber("Encoder Reading", encoderDistanceReading);
 		switch (autoSelected) {
 		case path1a:
-			myRobot.setSafetyEnabled(false);
-			myRobot.drive(-0.5, 1.0); // spin at half speed
-			Timer.delay(.5); // for 2 seconds
-			myRobot.drive(0.0, 0.0); // stop robot break;
+//			myRobot.setSafetyEnabled(false);
+			// drive for 2 seconds
+			timerCount = timer.get();
+			System.out.println(timerCount);
+			if (timerCount < 2.0) {
+				System.out.println("Path 1a");
+				myRobot.drive(-0.5, 0.0); // drive forwards half speed
+//				Timer.delay(.5); // for 2 seconds
+			} else {
+				myRobot.drive(0.0, 0.0);// stop driving
+			}
+			break;
 		case path1b:
 			System.out.println("Path 1b");
+			break;
 		case path1c:
 			System.out.println("Path 1c");
+			break;
 		case path2a:
 			System.out.println("Path 2a");
+			break;
 		case path2b:
 			System.out.println("Path 2b");
+			break;
 		case path2c:
 			System.out.println("Path 2c");
+			break;
 		case path3a:
 			System.out.println("Path 3a");
+			break;
 		case path3b:
 			System.out.println("Path 3b");
+			break;
 		case path3c:
 			System.out.println("Path 3c");
+			break;
 		default:
 			if (encoderDistanceReading < 5.0) {
 				myRobot.setSafetyEnabled(false);
