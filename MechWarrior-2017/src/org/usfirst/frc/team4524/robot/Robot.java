@@ -137,10 +137,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		double encoderDistanceReading = leftEncoder.getDistance();
-		SmartDashboard.putNumber("Left Encoder Reading", encoderDistanceReading);
-		encoderDistanceReading = rightEncoder.getDistance();
-		SmartDashboard.putNumber("Right Encoder Reading", encoderDistanceReading);
+		double leftEncoderDistanceReading = leftEncoder.getDistance();
+		SmartDashboard.putNumber("Left Encoder Reading", leftEncoderDistanceReading);
+		double rightEncoderDistanceReading = rightEncoder.getDistance();
+		SmartDashboard.putNumber("Right Encoder Reading", rightEncoderDistanceReading);
 
 		switch (autoSelected) {
 		case path1a:
@@ -181,7 +181,7 @@ public class Robot extends IterativeRobot {
 			System.out.println("Path 3c");
 			break;
 		default:
-			if (encoderDistanceReading < 5.0) {
+			if (leftEncoderDistanceReading < .5) {
 				myRobot.setSafetyEnabled(false);
 				myRobot.drive(-0.5, 0.0); // drive forwards half speed
 				Timer.delay(.5); // for 2 seconds
@@ -203,11 +203,13 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		double encoderDistanceReading = leftEncoder.getDistance();
-		SmartDashboard.putNumber("Left Encoder Reading", encoderDistanceReading);
-		encoderDistanceReading = rightEncoder.getDistance();
-		SmartDashboard.putNumber("Right Encoder Reading", encoderDistanceReading);
-		myRobot.arcadeDrive(stick);
+		double leftEncoderDistanceReading = leftEncoder.getDistance();
+		SmartDashboard.putNumber("Left Encoder Reading", leftEncoderDistanceReading);
+		double rightEncoderDistanceReading = rightEncoder.getDistance();
+		SmartDashboard.putNumber("Right Encoder Reading", rightEncoderDistanceReading);
+		if (rightEncoderDistanceReading < .5) {
+			myRobot.arcadeDrive(stick);
+		}
 	}
 
 	/**
