@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.buttons.Button;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -37,11 +38,12 @@ public class Robot extends IterativeRobot {
 	final String path3c = "Path 3c";
 	String autoSelected;
 	SendableChooser<String> chooser = new SendableChooser<>();
-	RobotDrive myRobot = new RobotDrive(0, 1);
+	public static RobotDrive myRobot = new RobotDrive(0, 1);
 	Joystick stick = new Joystick(0);
 	Timer timer = new Timer();
 	double timerCount = 0;
-	Encoder sampleEncoder = new Encoder(1, 2, true, EncodingType.k4X);
+	Encoder leftEncoder = new Encoder(0, 1, true, EncodingType.k4X);
+	Encoder rightEncoder = new Encoder(2, 3, true, EncodingType.k4X);
 	public static final double WHEEL_DIAMETER = 6;
 	public static final double PULSE_PER_REVOLUTION = 360;
 	public static final double ENCODER_GEAR_RATIO = 1;
@@ -101,7 +103,8 @@ public class Robot extends IterativeRobot {
 		visionThread.start();
 		final double distancePerPulse = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION / ENCODER_GEAR_RATIO
 				/ GEAR_RATIO * FUDGE_FACTOR;
-		sampleEncoder.setDistancePerPulse(distancePerPulse);
+		leftEncoder.setDistancePerPulse(distancePerPulse);
+		rightEncoder.setDistancePerPulse(distancePerPulse);
 		System.out.println("Distance per pulse: " + distancePerPulse);
 
 	}
@@ -124,7 +127,8 @@ public class Robot extends IterativeRobot {
 		// defaultAuto);
 		timer.reset();
 		timer.start();
-		sampleEncoder.reset();
+		leftEncoder.reset();
+		rightEncoder.reset();
 
 	}
 
@@ -133,18 +137,21 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		double encoderDistanceReading = sampleEncoder.getDistance();
-		SmartDashboard.putNumber("Encoder Reading", encoderDistanceReading);
+		double encoderDistanceReading = leftEncoder.getDistance();
+		SmartDashboard.putNumber("Left Encoder Reading", encoderDistanceReading);
+		encoderDistanceReading = rightEncoder.getDistance();
+		SmartDashboard.putNumber("Right Encoder Reading", encoderDistanceReading);
+
 		switch (autoSelected) {
 		case path1a:
-//			myRobot.setSafetyEnabled(false);
+			// myRobot.setSafetyEnabled(false);
 			// drive for 2 seconds
 			timerCount = timer.get();
 			System.out.println(timerCount);
 			if (timerCount < 2.0) {
 				System.out.println("Path 1a");
 				myRobot.drive(-0.5, 0.0); // drive forwards half speed
-//				Timer.delay(.5); // for 2 seconds
+				// Timer.delay(.5); // for 2 seconds
 			} else {
 				myRobot.drive(0.0, 0.0);// stop driving
 			}
@@ -186,7 +193,8 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void teleopInit() {
-		sampleEncoder.reset();
+		leftEncoder.reset();
+		rightEncoder.reset();
 
 	}
 
@@ -195,8 +203,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		double encoderDistanceReading = sampleEncoder.getDistance();
-		SmartDashboard.putNumber("encoder reading", encoderDistanceReading);
+		double encoderDistanceReading = leftEncoder.getDistance();
+		SmartDashboard.putNumber("Left Encoder Reading", encoderDistanceReading);
+		encoderDistanceReading = rightEncoder.getDistance();
+		SmartDashboard.putNumber("Right Encoder Reading", encoderDistanceReading);
 		myRobot.arcadeDrive(stick);
 	}
 
