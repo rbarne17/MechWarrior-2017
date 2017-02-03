@@ -148,7 +148,7 @@ public class Robot extends IterativeRobot {
 			// drive for 2 seconds
 			timerCount = timer.get();
 			System.out.println(timerCount);
-			if (timerCount < 2.0) {
+			if (rightEncoderDistanceReading < .5) {
 				System.out.println("Path 1a");
 				myRobot.drive(-0.5, 0.0); // drive forwards half speed
 				// Timer.delay(.5); // for 2 seconds
@@ -181,7 +181,7 @@ public class Robot extends IterativeRobot {
 			System.out.println("Path 3c");
 			break;
 		default:
-			if (leftEncoderDistanceReading < .5) {
+			if (rightEncoderDistanceReading < .5) {
 				myRobot.setSafetyEnabled(false);
 				myRobot.drive(-0.5, 0.0); // drive forwards half speed
 				Timer.delay(.5); // for 2 seconds
