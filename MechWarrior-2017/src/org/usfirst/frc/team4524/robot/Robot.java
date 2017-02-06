@@ -43,8 +43,9 @@ public class Robot extends IterativeRobot {
 	Joystick stick = new Joystick(0);
 	Timer timer = new Timer();
 	double timerCount = 0;
-	Encoder leftEncoder = new Encoder(0, 1, true, EncodingType.k4X);
-	Encoder rightEncoder = new Encoder(2, 3, true, EncodingType.k4X);
+	//check with 4524 Build Team for DIO ports for these
+	Encoder leftEncoder = new Encoder(1, 2, true, EncodingType.k4X);
+	Encoder rightEncoder = new Encoder(3, 4, true, EncodingType.k4X);
 	public static final double WHEEL_DIAMETER = 6;
 	public static final double PULSE_PER_REVOLUTION = 360;
 	public static final double ENCODER_GEAR_RATIO = 1;
