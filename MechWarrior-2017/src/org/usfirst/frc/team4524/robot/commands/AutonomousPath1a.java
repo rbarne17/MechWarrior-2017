@@ -10,6 +10,7 @@ import org.usfirst.frc.team4524.robot.Robot;
  */
 public class AutonomousPath1a extends CommandGroup {
 	public AutonomousPath1a() {
+		System.out.println("Path 1a");
 //		addSequential(new CloseClaw());
 //		addSequential(new WaitForPressure(), 2);
 //		if (Robot.isReal()) {

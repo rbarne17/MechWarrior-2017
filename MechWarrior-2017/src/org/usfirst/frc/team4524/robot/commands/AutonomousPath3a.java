@@ -10,14 +10,15 @@ import org.usfirst.frc.team4524.robot.Robot;
  */
 public class AutonomousPath3a extends CommandGroup {
 	public AutonomousPath3a() {
-//		addSequential(new CloseClaw());
-//		addSequential(new WaitForPressure(), 2);
-//		if (Robot.isReal()) {
-//			// NOTE: Simulation doesn't currently have the concept of hot.
-//			addSequential(new CheckForHotGoal(2));
-//		}
-//		addSequential(new SetPivotSetpoint(45));
-//		addSequential(new DriveForward(8, 0.3));
-//		addSequential(new Shoot());
+		System.out.println("Path 3a");
+		// addSequential(new CloseClaw());
+		// addSequential(new WaitForPressure(), 2);
+		// if (Robot.isReal()) {
+		// // NOTE: Simulation doesn't currently have the concept of hot.
+		// addSequential(new CheckForHotGoal(2));
+		// }
+		// addSequential(new SetPivotSetpoint(45));
+		// addSequential(new DriveForward(8, 0.3));
+		// addSequential(new Shoot());
 	}
 }

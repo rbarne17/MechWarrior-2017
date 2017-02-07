@@ -163,8 +163,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		autoSelected = chooser.getSelected();
-		// autoSelected = SmartDashboard.getString("Auto Selector",
-		// defaultAuto);
 		timer.reset();
 		timer.start();
 		leftEncoder.reset();
