@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4524.robot;
+package org.usfirst.frc.team4524.robot.commands;
 
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Command;
