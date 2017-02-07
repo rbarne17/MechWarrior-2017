@@ -3,6 +3,7 @@ package org.usfirst.frc.team4524.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 import org.usfirst.frc.team4524.robot.Robot;
+import org.usfirst.frc.team4524.robot.commands.PrintPath;
 
 /**
  * Drive over the line and then shoot the ball. If the hot goal is not detected,
@@ -10,7 +11,7 @@ import org.usfirst.frc.team4524.robot.Robot;
  */
 public class AutonomousPath1a extends CommandGroup {
 	public AutonomousPath1a() {
-		System.out.println("Path 1a");
+		addSequential(new PrintPath("Path 1a"));
 //		addSequential(new CloseClaw());
 //		addSequential(new WaitForPressure(), 2);
 //		if (Robot.isReal()) {
