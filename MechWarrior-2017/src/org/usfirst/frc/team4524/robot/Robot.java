@@ -56,14 +56,6 @@ public class Robot extends IterativeRobot {
 	Joystick stick = new Joystick(0);
 	Timer timer = new Timer();
 	double timerCount = 0;
-	// check with 4524 Build Team for DIO ports for these
-	Encoder leftEncoder = new Encoder(1, 2, true, EncodingType.k4X);
-	Encoder rightEncoder = new Encoder(3, 4, true, EncodingType.k4X);
-	public static final double WHEEL_DIAMETER = 6;
-	public static final double PULSE_PER_REVOLUTION = 360;
-	public static final double ENCODER_GEAR_RATIO = 1;
-	public static final double GEAR_RATIO = 10.71 / 1;
-	public static final double FUDGE_FACTOR = 1.0;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -90,9 +82,9 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(pneumatics);
 
 		autoChooser.addDefault(path1a, new AutonomousPath1a());
-		autoChooser.addObject( path1b, new AutonomousPath1b());
+		autoChooser.addObject(path1b, new AutonomousPath1b());
 		autoChooser.addObject(path1c, new AutonomousPath1c());
-		autoChooser.addObject(path2a, new AutonomousPath2a());		
+		autoChooser.addObject(path2a, new AutonomousPath2a());
 		autoChooser.addObject(path2b, new AutonomousPath2b());
 		autoChooser.addObject(path2c, new AutonomousPath2c());
 		autoChooser.addObject(path3a, new AutonomousPath3a());
@@ -115,7 +107,7 @@ public class Robot extends IterativeRobot {
 
 			// This cannot be 'true'. The program will never exit if it is. This
 			// lets the robot stop this thread when restarting robot code or
-			// deploying.
+			// deploying.-
 			while (!Thread.interrupted()) {
 				// Tell the CvSink to grab a frame from the camera and put it
 				// in the source mat. If there is an error notify the output.
@@ -133,11 +125,6 @@ public class Robot extends IterativeRobot {
 		});
 		visionThread.setDaemon(true);
 		visionThread.start();
-		final double distancePerPulse = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION / ENCODER_GEAR_RATIO
-				/ GEAR_RATIO * FUDGE_FACTOR;
-		leftEncoder.setDistancePerPulse(distancePerPulse);
-		rightEncoder.setDistancePerPulse(distancePerPulse);
-		System.out.println("Distance per pulse: " + distancePerPulse);
 
 	}
 
@@ -156,8 +143,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		timer.reset();
 		timer.start();
-		leftEncoder.reset();
-		rightEncoder.reset();
+		Robot.driveTrain.reset();
 		// instantiate the command used for the autonomous period
 		autonomousCommand = (Command) autoChooser.getSelected();
 
@@ -173,10 +159,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		double leftEncoderDistanceReading = leftEncoder.getDistance();
-		SmartDashboard.putNumber("Left Encoder Reading", leftEncoderDistanceReading);
-		double rightEncoderDistanceReading = rightEncoder.getDistance();
-		SmartDashboard.putNumber("Right Encoder Reading", rightEncoderDistanceReading);
+		double encoderDistanceReading = Robot.driveTrain.getDistance();
+		SmartDashboard.putNumber("Encoder Reading", encoderDistanceReading);
 
 		// switch (autoSelected) {
 		// case path1a:
@@ -233,8 +217,12 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void teleopInit() {
-		leftEncoder.reset();
-		rightEncoder.reset();
+		// This makes sure that the autonomous stops running when
+		// teleop starts running. If you want the autonomous to
+		// continue until interrupted by another command, remove
+		// this line or comment it out.
+		autonomousCommand.cancel();
+		Robot.driveTrain.reset();
 
 	}
 
@@ -243,13 +231,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		double leftEncoderDistanceReading = leftEncoder.getDistance();
-		SmartDashboard.putNumber("Left Encoder Reading", leftEncoderDistanceReading);
-		double rightEncoderDistanceReading = rightEncoder.getDistance();
-		SmartDashboard.putNumber("Right Encoder Reading", rightEncoderDistanceReading);
-		if (rightEncoderDistanceReading < .5) {
-			myRobot.arcadeDrive(stick);
-		}
+		double encoderDistanceReading = Robot.driveTrain.getDistance();
+		SmartDashboard.putNumber("Encoder Reading", encoderDistanceReading);
+		Scheduler.getInstance().run();
 	}
 
 	/**
