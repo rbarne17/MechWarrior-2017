@@ -14,5 +14,6 @@ public class AutonomousPath1a extends CommandGroup {
 		addSequential(new PrintPath("Path 1a"));
 		addSequential(new DriveForward(2));
 		addSequential(new TurnHeading(90));
+		addSequential(new DriveForward(10));
 	}
 }

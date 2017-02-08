@@ -31,18 +31,18 @@ public class DriveForward extends Command {
 
 	@Override
 	protected void initialize() {
-//		Robot.driveTrain.getRightEncoder().reset();
-//		setTimeout(2);
+		Robot.driveTrain.reset();
+		setTimeout(2);
 	}
 
 	@Override
 	protected void execute() {
-//		error = (distance - Robot.drivetrain.getRightEncoder().getDistance());
-//		if (driveForwardSpeed * kP * error >= driveForwardSpeed) {
-//			Robot.drivetrain.tankDrive(driveForwardSpeed, driveForwardSpeed);
-//		} else {
-//			Robot.drivetrain.tankDrive(driveForwardSpeed * kP * error, driveForwardSpeed * kP * error);
-//		}
+		error = (distance - Robot.driveTrain.getDistance());
+		if (driveForwardSpeed * kP * error >= driveForwardSpeed) {
+			Robot.driveTrain.drive(driveForwardSpeed, driveForwardSpeed);
+		} else {
+			Robot.driveTrain.drive(driveForwardSpeed * kP * error, driveForwardSpeed * kP * error);
+		}
 	}
 
 	@Override
@@ -52,6 +52,6 @@ public class DriveForward extends Command {
 
 	@Override
 	protected void end() {
-//		Robot.drivetrain.stop();
+		Robot.driveTrain.drive(0.0,0.0);
 	}
 }
