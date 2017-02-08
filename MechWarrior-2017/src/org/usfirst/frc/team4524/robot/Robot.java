@@ -159,54 +159,6 @@ public class Robot extends IterativeRobot {
 		double encoderDistanceReading = Robot.driveTrain.getDistance();
 		SmartDashboard.putNumber("Encoder Reading", encoderDistanceReading);
 
-		// switch (autoSelected) {
-		// case path1a:
-		// // myRobot.setSafetyEnabled(false);
-		// // drive for 2 seconds
-		// timerCount = timer.get();
-		// System.out.println(timerCount);
-		// if (rightEncoderDistanceReading < .5) {
-		// System.out.println("Path 1a");
-		// myRobot.drive(-0.5, 0.0); // drive forwards half speed
-		// // Timer.delay(.5); // for 2 seconds
-		// } else {
-		// myRobot.drive(0.0, 0.0);// stop driving
-		// }
-		// break;
-		// case path1b:
-		// System.out.println("Path 1b");
-		// break;
-		// case path1c:
-		// System.out.println("Path 1c");
-		// break;
-		// case path2a:
-		// System.out.println("Path 2a");
-		// break;
-		// case path2b:
-		// System.out.println("Path 2b");
-		// break;
-		// case path2c:
-		// System.out.println("Path 2c");
-		// break;
-		// case path3a:
-		// System.out.println("Path 3a");
-		// break;
-		// case path3b:
-		// System.out.println("Path 3b");
-		// break;
-		// case path3c:
-		// System.out.println("Path 3c");
-		// break;
-		// default:
-		// if (rightEncoderDistanceReading < .5) {
-		// myRobot.setSafetyEnabled(false);
-		// myRobot.drive(-0.5, 0.0); // drive forwards half speed
-		// Timer.delay(.5); // for 2 seconds
-		// myRobot.drive(0.0, 0.0); // stop robot
-		// break;
-		// }
-		// }
-
 	}
 
 	@Override
