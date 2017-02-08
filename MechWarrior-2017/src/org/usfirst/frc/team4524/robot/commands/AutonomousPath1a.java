@@ -2,7 +2,6 @@ package org.usfirst.frc.team4524.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-import org.usfirst.frc.team4524.robot.Robot;
 import org.usfirst.frc.team4524.robot.commands.PrintPath;
 
 /**

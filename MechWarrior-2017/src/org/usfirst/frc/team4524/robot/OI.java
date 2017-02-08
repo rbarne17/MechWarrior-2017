@@ -5,7 +5,6 @@ import org.usfirst.frc.team4524.robot.commands.Reverse;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
 
 
 
