@@ -12,14 +12,7 @@ import org.usfirst.frc.team4524.robot.commands.PrintPath;
 public class AutonomousPath1a extends CommandGroup {
 	public AutonomousPath1a() {
 		addSequential(new PrintPath("Path 1a"));
-//		addSequential(new CloseClaw());
-//		addSequential(new WaitForPressure(), 2);
-//		if (Robot.isReal()) {
-//			// NOTE: Simulation doesn't currently have the concept of hot.
-//			addSequential(new CheckForHotGoal(2));
-//		}
-//		addSequential(new SetPivotSetpoint(45));
-//		addSequential(new DriveForward(8, 0.3));
-//		addSequential(new Shoot());
+		addSequential(new DriveForward(2));
+		addSequential(new TurnHeading(90));
 	}
 }
