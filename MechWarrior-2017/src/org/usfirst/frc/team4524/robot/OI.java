@@ -1,10 +1,11 @@
 package org.usfirst.frc.team4524.robot;
 
-import org.usfirst.frc.team4524.robot.commands.Reverse;
+import org.usfirst.frc.team4524.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
@@ -15,7 +16,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	Joystick Driver = new Joystick(0);
 	Joystick Driver2 = new Joystick(1);
-		
+	
 	public Joystick getDriverJoystick1(){
 		return Driver;
 	}
@@ -39,6 +40,9 @@ public class OI {
 					button12 = new JoystickButton(stick,12);
 public OI(){
 		button7.toggleWhenPressed(new Reverse());
+		SmartDashboard.putData("Run Path 1a", new AutonomousPath1a());
+		SmartDashboard.putData("Drive Forward", new DriveForward(10));
+		SmartDashboard.putData("Turn 45 Degrees", new TurnHeading(45));
 	}		
 	
 }
