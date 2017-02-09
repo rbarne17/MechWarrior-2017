@@ -7,42 +7,34 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-
-
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	Joystick Driver = new Joystick(0);
-	Joystick Driver2 = new Joystick(1);
-	
-	public Joystick getDriverJoystick1(){
-		return Driver;
+	Joystick stick1 = new Joystick(0);
+	Joystick stick2 = new Joystick(1);
+
+	public Joystick getDriverJoystick1() {
+		return stick1;
 	}
-	
-	public Joystick getDriver2Joystick(){
-		return Driver2;
-	}	
-	
-	Joystick stick = new Joystick(0);
-	Button button1 = new JoystickButton(stick,1),
-					button2 = new JoystickButton(stick,2),
-					button3 = new JoystickButton(stick,3),
-					button4 = new JoystickButton(stick,4),
-					button5 = new JoystickButton(stick,5),
-					button6 = new JoystickButton(stick,6),
-					button7 = new JoystickButton(stick,7),
-					button8 = new JoystickButton(stick,8),
-					button9 = new JoystickButton(stick,9),
-					button10 = new JoystickButton(stick,10),
-					button11 = new JoystickButton(stick,11),
-					button12 = new JoystickButton(stick,12);
-public OI(){
+
+	public Joystick getDriver2Joystick() {
+		return stick2;
+	}
+
+	Button button1 = new JoystickButton(stick1, 1), button2 = new JoystickButton(stick1, 2),
+			button3 = new JoystickButton(stick1, 3), button4 = new JoystickButton(stick1, 4),
+			button5 = new JoystickButton(stick1, 5), button6 = new JoystickButton(stick1, 6),
+			button7 = new JoystickButton(stick1, 7), button8 = new JoystickButton(stick1, 8),
+			button9 = new JoystickButton(stick1, 9), button10 = new JoystickButton(stick1, 10),
+			button11 = new JoystickButton(stick1, 11), button12 = new JoystickButton(stick1, 12);
+
+	public OI() {
 		button7.toggleWhenPressed(new Reverse());
 		SmartDashboard.putData("Run Path 1a", new AutonomousPath1a());
 		SmartDashboard.putData("Drive Forward", new DriveForward(10));
 		SmartDashboard.putData("Turn 45 Degrees", new TurnHeading(45));
-	}		
-	
+	}
+
 }
