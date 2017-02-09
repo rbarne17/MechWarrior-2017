@@ -28,12 +28,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DriveTrain extends Subsystem {
 
-	private SpeedController frontLeftMotor = new Talon(1);
+	private SpeedController frontLeftMotor = new Talon(0);
+	private SpeedController frontRightMotor = new Talon(1);
 	private SpeedController rearLeftMotor = new Talon(2);
-	private SpeedController frontRightMotor = new Talon(3);
-	private SpeedController rearRightMotor = new Talon(4);
+	private SpeedController rearRightMotor = new Talon(3);
 
-	private RobotDrive drive = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
+	private RobotDrive drive = new RobotDrive(frontLeftMotor, frontRightMotor);
 
 	// check with 4524 Build Team for DIO ports for these
 	private Encoder leftEncoder = new Encoder(1, 2, true, EncodingType.k4X);
@@ -95,7 +95,7 @@ public class DriveTrain extends Subsystem {
 	 *            The ps3 style joystick to use to drive tank style.
 	 */
 	public void drive(Joystick joy) {
-		drive(-joy.getY(), -joy.getAxis(AxisType.kThrottle));
+		drive.arcadeDrive(joy);
 	}
 
 	/**
