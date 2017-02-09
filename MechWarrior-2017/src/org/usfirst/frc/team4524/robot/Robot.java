@@ -49,8 +49,6 @@ public class Robot extends IterativeRobot {
 	final String path3b = "Path 3b";
 	final String path3c = "Path 3c";
 	public SendableChooser autoChooser = new SendableChooser<>();
-	public static RobotDrive myRobot = new RobotDrive(0, 1);
-	Joystick stick = new Joystick(0);
 	Timer timer = new Timer();
 	double timerCount = 0;
 
