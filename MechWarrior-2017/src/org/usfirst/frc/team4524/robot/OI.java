@@ -33,7 +33,7 @@ public class OI {
 	public OI() {
 		button7.toggleWhenPressed(new Reverse());
 		SmartDashboard.putData("Run Path 1a", new AutonomousPath1a());
-		SmartDashboard.putData("Drive Forward", new DriveForward(10));
+		SmartDashboard.putData("Drive Forward", new DriveForward(2));
 		SmartDashboard.putData("Turn 45 Degrees", new TurnHeading(45));
 	}
 
