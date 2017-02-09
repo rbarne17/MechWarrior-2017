@@ -9,6 +9,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousPath1b extends CommandGroup {
 	public AutonomousPath1b() {
 		System.out.println("Path 1b");
+		addSequential(new PrintPath("Path 1b"));
+		addSequential(new DriveForward(2));
+		addSequential(new TurnHeading(90));
+		addSequential(new DriveForward(10));
 	
 	}
 }
