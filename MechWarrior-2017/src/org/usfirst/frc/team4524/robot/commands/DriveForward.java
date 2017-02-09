@@ -32,7 +32,7 @@ public class DriveForward extends Command {
 	@Override
 	protected void initialize() {
 		Robot.driveTrain.reset();
-		setTimeout(2);
+		setTimeout(10);
 	}
 
 	@Override
