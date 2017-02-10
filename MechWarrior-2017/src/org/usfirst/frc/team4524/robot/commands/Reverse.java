@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4524.robot.commands;
 
+import org.usfirst.frc.team4524.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -8,13 +10,14 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Reverse extends Command {
 
     public Reverse() {
-//    	requires(Robot.myRobot);
-    	
+//    	requires(Robot.myRobot);  	
     }
 
     // Called just before this Command runs the first time
     @Override
 	protected void initialize() {
+    	//Robot.driveTrain.invertDrive();
+    	    	
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -10,6 +10,7 @@
 
 package org.usfirst.frc.team4524.robot.subsystems;
 
+import org.usfirst.frc.team4524.robot.Robot;
 import org.usfirst.frc.team4524.robot.commands.*;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
@@ -128,4 +129,12 @@ public class DriveTrain extends Subsystem {
 		// Really meters in simulation since it's a rangefinder...
 		return rangefinder.getAverageVoltage();
 	}
+
+	/*public void invertDrive() {
+		drive.setInvertedMotor(frontLeftMotor, true);
+   	 drive.setInvertedMotor(frontRightMotor, true);
+   	 drive.setInvertedMotor(rearLeftMotor, true);
+   	 drive.setInvertedMotor(rearRightMotor, true);
+   	 drive.
+	}*/
 }
