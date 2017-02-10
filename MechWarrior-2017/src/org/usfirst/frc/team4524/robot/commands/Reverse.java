@@ -18,12 +18,13 @@ public class Reverse extends Command {
     
     @Override
 	protected void initialize() {
+    	//Robot.driveTrain.invertDrive();
     }
 
     
     @Override
 	protected void execute() {
-    	Robot.driveTrain
+    
     
     }
 
@@ -43,6 +44,10 @@ public class Reverse extends Command {
     @Override
 	protected void interrupted() {
     }
-    public void invertDrive()
+    /*public void invertDrive(){
+		drive.setInvertedMotor(frontLeftMotor, true);
+    	drive.setInvertedMotor(frontRightMotor, true);
+    	drive.setInvertedMotor(rearLeftMotor, true);
+    	drive.setInvertedMotor(rearRightMotor, true);
+    }*/
 }
-
