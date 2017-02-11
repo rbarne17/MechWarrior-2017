@@ -10,9 +10,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Reverse extends Command {
 
     public Reverse() {
-//    	requires(Robot.myRobot);
-    	double value;
-    	value = 
     }
 
     // Called just before this Command runs the first time
