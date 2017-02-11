@@ -36,5 +36,5 @@ public class OI {
 		SmartDashboard.putData("Drive Forward", new DriveForward(2));
 		SmartDashboard.putData("Turn 45 Degrees", new TurnHeading(45));
 	}
-
+	
 }

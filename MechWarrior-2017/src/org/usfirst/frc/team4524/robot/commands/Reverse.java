@@ -11,7 +11,8 @@ public class Reverse extends Command {
 
     public Reverse() {
 //    	requires(Robot.myRobot);
-    	
+    	double value;
+    	value = 
     }
 
     // Called just before this Command runs the first time
@@ -39,5 +40,6 @@ public class Reverse extends Command {
     // subsystems is scheduled to run
     @Override
 	protected void interrupted() {
-    }
+    	
+    }	
 }
