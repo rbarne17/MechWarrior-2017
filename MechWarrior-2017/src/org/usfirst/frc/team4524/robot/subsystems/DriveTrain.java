@@ -10,7 +10,7 @@
 
 package org.usfirst.frc.team4524.robot.subsystems;
 
-import org.usfirst.frc.team4524.robot.Robot;
+
 import org.usfirst.frc.team4524.robot.commands.*;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
@@ -130,11 +131,10 @@ public class DriveTrain extends Subsystem {
 		return rangefinder.getAverageVoltage();
 	}
 
-	/*public void invertDrive() {
-		drive.setInvertedMotor(frontLeftMotor, true);
-   	 drive.setInvertedMotor(frontRightMotor, true);
-   	 drive.setInvertedMotor(rearLeftMotor, true);
-   	 drive.setInvertedMotor(rearRightMotor, true);
-   	 drive.
-	}*/
+	public void invertDrive(){
+		drive.setInvertedMotor(MotorType.kFrontLeft, true);	
+		drive.setInvertedMotor(MotorType.kRearLeft,true);
+		drive.setInvertedMotor(MotorType.kFrontRight,true);
+		drive.setInvertedMotor(MotorType.kRearRight,true);
+ }
 }
