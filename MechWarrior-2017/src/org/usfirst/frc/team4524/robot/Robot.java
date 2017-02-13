@@ -138,7 +138,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		timer.reset();
 		timer.start();
-		Robot.driveTrain.reset();
+//		Robot.driveTrain.reset();
 		// instantiate the command used for the autonomous period
 		autonomousCommand = (Command) autoChooser.getSelected();
 
@@ -173,7 +173,7 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
-		Robot.driveTrain.reset();
+//		Robot.driveTrain.reset();
 
 	}
 
