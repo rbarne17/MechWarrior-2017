@@ -22,6 +22,8 @@ package org.usfirst.frc.team4524.robot;
  * floating around.
  */
 public class RobotMap {
+	
+	public class DriveTrainMap {
 	public static final int frontLeftMotor = 1;
 	public static final int rearLeftMotor = 2;
 	public static final int frontRightMotor = 3;
@@ -32,6 +34,19 @@ public class RobotMap {
 	public static final int rightEncoderChannel2 = 4;
 	public static final int rangefinder = 6;
 	public static final int gyro = 1;
+	
+	}
+	public class FuelCollector {
+		
+	}
+	
+	public class FuelPickupDropoff {
+		
+	}
+	
+	public class RopeClimbier {
+		
+	}
 	
 	
 		
