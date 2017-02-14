@@ -33,14 +33,13 @@ public class DriveTrain extends Subsystem {
 	private SpeedController rearLeftMotor = new Talon(RobotMap.DriveTrainMap.rearLeftMotor);
 	private SpeedController frontRightMotor = new Talon(RobotMap.DriveTrainMap.frontRightMotor);
 	private SpeedController rearRightMotor = new Talon(RobotMap.DriveTrainMap.rearRightMotor);
-
 	private RobotDrive drive = new RobotDrive(frontLeftMotor, frontRightMotor);
 
-	// check with 4524 Build Team for DIO ports for these
 	private Encoder leftEncoder = new Encoder(RobotMap.DriveTrainMap.leftEncoderChannel1,RobotMap.DriveTrainMap.leftEncoderChannel2, true, EncodingType.k4X);
 	private Encoder rightEncoder = new Encoder(RobotMap.DriveTrainMap.rightEncoderChannel1, RobotMap.DriveTrainMap.rightEncoderChannel2, true, EncodingType.k4X);
 	private AnalogInput rangefinder = new AnalogInput(RobotMap.DriveTrainMap.rangefinder);
 	private AnalogGyro gyro = new AnalogGyro(RobotMap.DriveTrainMap.gyro);
+	
 	public static final double WHEEL_DIAMETER = 6;
 	public static final double PULSE_PER_REVOLUTION = 360;
 	public static final double ENCODER_GEAR_RATIO = 1;
