@@ -29,16 +29,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DriveTrain extends Subsystem {
 
-	private SpeedController frontLeftMotor = new Talon(RobotMap.DriveTrainMap.frontLeftMotor);
-	private SpeedController rearLeftMotor = new Talon(RobotMap.DriveTrainMap.rearLeftMotor);
-	private SpeedController frontRightMotor = new Talon(RobotMap.DriveTrainMap.frontRightMotor);
-	private SpeedController rearRightMotor = new Talon(RobotMap.DriveTrainMap.rearRightMotor);
+	private SpeedController frontLeftMotor = new Talon(RobotMap.frontLeftMotor);
+	private SpeedController rearLeftMotor = new Talon(RobotMap.rearLeftMotor);
+	private SpeedController frontRightMotor = new Talon(RobotMap.frontRightMotor);
+	private SpeedController rearRightMotor = new Talon(RobotMap.rearRightMotor);
 	private RobotDrive drive = new RobotDrive(frontLeftMotor, frontRightMotor);
 
-	private Encoder leftEncoder = new Encoder(RobotMap.DriveTrainMap.leftEncoderChannel1,RobotMap.DriveTrainMap.leftEncoderChannel2, true, EncodingType.k4X);
-	private Encoder rightEncoder = new Encoder(RobotMap.DriveTrainMap.rightEncoderChannel1, RobotMap.DriveTrainMap.rightEncoderChannel2, true, EncodingType.k4X);
-	private AnalogInput rangefinder = new AnalogInput(RobotMap.DriveTrainMap.rangefinder);
-	private AnalogGyro gyro = new AnalogGyro(RobotMap.DriveTrainMap.gyro);
+	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderChannel1,RobotMap.leftEncoderChannel2, true, EncodingType.k4X);
+	private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderChannel1, RobotMap.rightEncoderChannel2, true, EncodingType.k4X);
+	private AnalogInput rangefinder = new AnalogInput(RobotMap.rangefinder);
+	private AnalogGyro gyro = new AnalogGyro(RobotMap.gyro);
 	
 	public static final double WHEEL_DIAMETER = 6;
 	public static final double PULSE_PER_REVOLUTION = 360;
