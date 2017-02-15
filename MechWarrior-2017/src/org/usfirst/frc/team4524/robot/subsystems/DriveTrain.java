@@ -13,6 +13,7 @@ package org.usfirst.frc.team4524.robot.subsystems;
 import org.usfirst.frc.team4524.robot.RobotMap;
 import org.usfirst.frc.team4524.robot.commands.*;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -38,7 +39,9 @@ public class DriveTrain extends Subsystem {
 	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderChannel1,RobotMap.leftEncoderChannel2, true, EncodingType.k4X);
 	private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderChannel1, RobotMap.rightEncoderChannel2, true, EncodingType.k4X);
 	private AnalogInput rangefinder = new AnalogInput(RobotMap.rangefinder);
-	private AnalogGyro gyro = new AnalogGyro(RobotMap.gyro);
+//	private AnalogGyro gyro = new AnalogGyro(RobotMap.gyro);
+	private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+	
 	
 	public static final double WHEEL_DIAMETER = 6;
 	public static final double PULSE_PER_REVOLUTION = 360;
