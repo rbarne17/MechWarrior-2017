@@ -11,8 +11,15 @@ public class Reverse extends Command {
 
 	public Reverse() {
 		requires(Robot.driveTrain);
+<<<<<<< HEAD
+=======
+	}>>>>>>>refs/remotes/origin/Solomon
+
+	<<<<<<<HEAD
 
 	}
+
+	=======>>>>>>>refs/remotes/origin/Solomon
 
 	@Override
 	protected void initialize() {
