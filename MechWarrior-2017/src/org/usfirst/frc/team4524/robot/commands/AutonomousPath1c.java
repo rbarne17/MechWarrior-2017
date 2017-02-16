@@ -9,11 +9,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousPath1c extends CommandGroup {
 	public AutonomousPath1c() {
 		System.out.println("Path 1c");
-		//Drive Forward ___ feet
-				addSequential(new DriveForward(2));
-				//Turn __ Degrees
-				addSequential(new TurnHeading(90));
-				//Drive forward ___ feet
-				addSequential(new DriveForward(10));
+
+		addSequential(new PrintPath("Path 1c"));
+		addSequential(new DriveForward(2));
+		addSequential(new TurnHeading(90));
+		addSequential(new DriveForward(10));
+
 	}
 }
