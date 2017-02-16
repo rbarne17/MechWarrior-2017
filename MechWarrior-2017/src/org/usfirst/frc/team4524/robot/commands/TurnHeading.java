@@ -42,7 +42,7 @@ public class TurnHeading extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.driveTrain.drive(0.0, 0.5);
+		Robot.driveTrain.drive(-0.5, 0.5);
 	}
 
 	@Override
