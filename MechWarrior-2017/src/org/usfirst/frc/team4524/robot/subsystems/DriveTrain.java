@@ -11,7 +11,15 @@
 package org.usfirst.frc.team4524.robot.subsystems;
 
 import org.usfirst.frc.team4524.robot.Robot;
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/Solomon
 import org.usfirst.frc.team4524.robot.RobotMap;
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/Solomon
 import org.usfirst.frc.team4524.robot.commands.*;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -38,13 +46,14 @@ public class DriveTrain extends Subsystem {
 	private SpeedController rearRightMotor = new Talon(RobotMap.rearRightMotor);
 	private RobotDrive drive = new RobotDrive(frontLeftMotor, frontRightMotor);
 
-	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderChannel1,RobotMap.leftEncoderChannel2, true, EncodingType.k4X);
-	private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderChannel1, RobotMap.rightEncoderChannel2, true, EncodingType.k4X);
+	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderChannel1, RobotMap.leftEncoderChannel2, true,
+			EncodingType.k4X);
+	private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderChannel1, RobotMap.rightEncoderChannel2, true,
+			EncodingType.k4X);
 	private AnalogInput rangefinder = new AnalogInput(RobotMap.rangefinder);
-//	private AnalogGyro gyro = new AnalogGyro(RobotMap.gyro);
+	// private AnalogGyro gyro = new AnalogGyro(RobotMap.gyro);
 	private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
-	
-	
+
 	public static final double WHEEL_DIAMETER = 6;
 	public static final double PULSE_PER_REVOLUTION = 360;
 	public static final double ENCODER_GEAR_RATIO = 1;
@@ -140,5 +149,5 @@ public class DriveTrain extends Subsystem {
     	drive.setInvertedMotor(MotorType.kRearRight, reverse);*/
     }
 
-	
+
 }
