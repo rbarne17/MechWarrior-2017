@@ -17,6 +17,11 @@ public class DriveWithJoystick extends Command {
 		requires(Robot.driveTrain);
 	}
 
+
+	public DriveWithJoystick(boolean forward){
+		requires(Robot.driveTrain);
+		Robot.driveTrain.invertDrive(forward);
+	}
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {

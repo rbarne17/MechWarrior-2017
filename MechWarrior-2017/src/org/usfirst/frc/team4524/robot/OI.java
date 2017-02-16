@@ -31,7 +31,7 @@ public class OI {
 			button11 = new JoystickButton(stick1, 11), button12 = new JoystickButton(stick1, 12);
 
 	public OI() {
-		button1.toggleWhenPressed(new Reverse());
+		button1.toggleWhenPressed(new DriveWithJoystick(false));
 		SmartDashboard.putData("Run Path 1a", new AutonomousPath1a());
 		SmartDashboard.putData("Drive Forward", new DriveForward(2));
 		SmartDashboard.putData("Turn 45 Degrees", new TurnHeading(45));
