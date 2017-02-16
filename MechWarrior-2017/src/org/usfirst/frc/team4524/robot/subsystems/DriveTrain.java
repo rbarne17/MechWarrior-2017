@@ -11,15 +11,8 @@
 package org.usfirst.frc.team4524.robot.subsystems;
 
 import org.usfirst.frc.team4524.robot.Robot;
-<<<<<<< HEAD
-=======
 
->>>>>>> refs/remotes/origin/Solomon
 import org.usfirst.frc.team4524.robot.RobotMap;
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/Solomon
 import org.usfirst.frc.team4524.robot.commands.*;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
