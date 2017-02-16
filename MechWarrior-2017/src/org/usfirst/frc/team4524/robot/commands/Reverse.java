@@ -38,7 +38,6 @@ public class Reverse extends Command {
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-
 		Robot.driveTrain.invertDrive(false);
 	}
 
