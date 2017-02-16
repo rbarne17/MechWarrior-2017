@@ -8,11 +8,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutonomousPath1b extends CommandGroup {
 	public AutonomousPath1b() {
-
 		addSequential(new PrintPath("Path 1b"));
+		// Drive Forward ___ feet
 		addSequential(new DriveForward(2));
+		// Turn __ Degrees
 		addSequential(new TurnHeading(90));
+		// Drive forward ___ feet
 		addSequential(new DriveForward(10));
-
 	}
 }

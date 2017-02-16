@@ -13,7 +13,6 @@ package org.usfirst.frc.team4524.robot.subsystems;
 import org.usfirst.frc.team4524.robot.Robot;
 
 import org.usfirst.frc.team4524.robot.RobotMap;
-
 import org.usfirst.frc.team4524.robot.commands.*;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -135,14 +134,13 @@ public class DriveTrain extends Subsystem {
 		// Really meters in simulation since it's a rangefinder...
 		return rangefinder.getAverageVoltage();
 	}
+	
+	public void invertDrive(boolean reverse){
+		/*drive.setInvertedMotor(MotorType.kFrontLeft, reverse);
+    	drive.setInvertedMotor(MotorType.kFrontRight, reverse);
+    	drive.setInvertedMotor(MotorType.kRearLeft, reverse);
+    	drive.setInvertedMotor(MotorType.kRearRight, reverse);*/
+    }
 
-	public void invertDrive(boolean reverse) {
-		/*
-		 * drive.setInvertedMotor(MotorType.kFrontLeft, reverse);
-		 * drive.setInvertedMotor(MotorType.kFrontRight, reverse);
-		 * drive.setInvertedMotor(MotorType.kRearLeft, reverse);
-		 * drive.setInvertedMotor(MotorType.kRearRight, reverse);
-		 */
-	}
 
 }
