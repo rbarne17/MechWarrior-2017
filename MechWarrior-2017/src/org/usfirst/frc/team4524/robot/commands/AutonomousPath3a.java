@@ -9,14 +9,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousPath3a extends CommandGroup {
 	public AutonomousPath3a() {
 		System.out.println("Path 3a");
-		// addSequential(new CloseClaw());
-		// addSequential(new WaitForPressure(), 2);
-		// if (Robot.isReal()) {
-		// // NOTE: Simulation doesn't currently have the concept of hot.
-		// addSequential(new CheckForHotGoal(2));
-		// }
-		// addSequential(new SetPivotSetpoint(45));
-		// addSequential(new DriveForward(8, 0.3));
-		// addSequential(new Shoot());
+		addSequential(new PrintPath("Path 3a"));
+		//Drive Forward ___ feet
+		addSequential(new DriveForward(2));
+		//Turn __ Degrees
+		addSequential(new TurnHeading(90));
+		//Drive forward ___ feet
+		addSequential(new DriveForward(10));
 	}
 }
