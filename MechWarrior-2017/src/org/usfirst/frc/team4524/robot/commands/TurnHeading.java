@@ -16,20 +16,30 @@ public class TurnHeading extends Command {
 	private double error;
 	private final double kTolerance = 0.1;
 	private final double kP = -1.0 / 5.0;
+	private String direction;
 
 	public TurnHeading() {
-		this(90, 0.5);
+		this(90, 0.5, "left");
 	}
 
 	public TurnHeading(double ang) {
-		this(ang, 0.5);
+		this(ang, 0.5, "left");
 	}
 
-	public TurnHeading(double ang, double maxSpeed) {
+	public TurnHeading(double ang, String dir) {
+		this(ang, 0.5, dir);
+	}
+	
+	public TurnHeading(double ang, double maxSpeed){
+		this(ang, maxSpeed, "left");
+	}
+
+	public TurnHeading(double ang, double maxSpeed, String dir) {
 		requires(Robot.driveTrain);
 		angle = ang;
 		driveForwardSpeed = maxSpeed;
 		driveReverseSpeed = -maxSpeed;
+		direction = dir;
 	}
 
 	@Override
@@ -42,7 +52,12 @@ public class TurnHeading extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.driveTrain.drive(-0.5, 0.5);
+		if (direction == "left") {
+			Robot.driveTrain.drive(driveReverseSpeed, driveForwardSpeed);
+		} else {
+			Robot.driveTrain.drive(driveForwardSpeed, driveReverseSpeed);
+
+		}
 	}
 
 	@Override
