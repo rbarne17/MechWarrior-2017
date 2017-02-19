@@ -124,11 +124,33 @@ public class DriveTrain extends Subsystem {
 		rightEncoder.reset();
 	}
 
+	public void gyroCalibrate() {
+		gyro.calibrate();
+	}
+
 	/**
 	 * @return The distance driven (average of left and right encoders).
 	 */
 	public double getDistance() {
-		return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
+		 return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
+	}
+
+	public int getEncoderCount() {
+		int leftCount = leftEncoder.get();
+		int rightCount = rightEncoder.get();
+		if (leftCount != 0 & rightCount != 0) {
+			System.out.println("leftCount-rightCount:" + leftCount + "-" + rightCount);
+			return leftCount + rightCount;
+		} else if (leftCount != 0) {
+			System.out.println("leftCount" + leftCount);
+			return leftCount;
+		} else if (rightCount != 0) {
+			System.out.println("rightCount:" + rightCount);
+			return rightCount;
+		} else {
+			return 0;
+		}
+
 	}
 
 	/**

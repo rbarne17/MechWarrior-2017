@@ -29,8 +29,8 @@ public class TurnHeading extends Command {
 	public TurnHeading(double ang, String dir) {
 		this(ang, 0.5, dir);
 	}
-	
-	public TurnHeading(double ang, double maxSpeed){
+
+	public TurnHeading(double ang, double maxSpeed) {
 		this(ang, maxSpeed, "left");
 	}
 
@@ -69,6 +69,6 @@ public class TurnHeading extends Command {
 
 	@Override
 	protected void end() {
-		// Robot.drivetrain.stop();
+		Robot.driveTrain.stop();
 	}
 }

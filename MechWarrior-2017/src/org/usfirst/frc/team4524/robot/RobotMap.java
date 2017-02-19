@@ -24,10 +24,10 @@ public class RobotMap {
 	public static final int rearLeftMotor = 2;
 	public static final int frontRightMotor = 1;
 	public static final int rearRightMotor = 4;
-	public static final int leftEncoderChannel1 = 1;
-	public static final int leftEncoderChannel2 = 2;
+	public static final int leftEncoderChannel1 = 0;
+	public static final int leftEncoderChannel2 = 1;
 	public static final int rightEncoderChannel1 = 3;
-	public static final int rightEncoderChannel2 = 4;
+	public static final int rightEncoderChannel2 = 2;
 	public static final int rangefinder = 6;
 	public static final int gyro = 1;
 
