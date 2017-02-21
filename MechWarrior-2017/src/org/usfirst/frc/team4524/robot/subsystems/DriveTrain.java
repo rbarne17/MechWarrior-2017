@@ -34,11 +34,12 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
  */
 public class DriveTrain extends Subsystem {
 
-	private SpeedController frontLeftMotor = new Talon(RobotMap.frontLeftMotor);
-	private SpeedController rearLeftMotor = new Talon(RobotMap.rearLeftMotor);
-	private SpeedController frontRightMotor = new Talon(RobotMap.frontRightMotor);
-	private SpeedController rearRightMotor = new Talon(RobotMap.rearRightMotor);
-	private RobotDrive drive = new RobotDrive(frontLeftMotor, frontRightMotor);
+	private SpeedController frontLeftMotor;
+	private SpeedController rearLeftMotor;
+	private SpeedController frontRightMotor;
+	private SpeedController rearRightMotor;
+	private RobotDrive drive;
+
 	private Gyro gyro;
 	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderChannel1, RobotMap.leftEncoderChannel2, true,
 			EncodingType.k4X);
@@ -70,10 +71,19 @@ public class DriveTrain extends Subsystem {
 				+ RobotMap.rightDistancePerPulse);
 		if (!Robot.isReal()) {
 			gyro = new AnalogGyro(2);
+			frontLeftMotor = new Talon(1);
+			rearLeftMotor = new Talon(2);
+			frontRightMotor = new Talon(3);
+			rearRightMotor = new Talon(4);
+
 		} else {
 			gyro = new ADXRS450_Gyro();
+			frontLeftMotor = new Talon(RobotMap.frontLeftMotor);
+			rearLeftMotor = new Talon(RobotMap.rearLeftMotor);
+			frontRightMotor = new Talon(RobotMap.frontRightMotor);
+			rearRightMotor = new Talon(RobotMap.rearRightMotor);
 		}
-
+		drive = new RobotDrive(frontLeftMotor, frontRightMotor);
 	}
 
 	@Override
@@ -135,22 +145,23 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public int getEncoderCount() {
-		if (Robot.isReal()){
+		if (Robot.isReal()) {
 			int leftCount = leftEncoder.get();
-		
-		int rightCount = rightEncoder.get();
-		if (leftCount != 0 & rightCount != 0) {
-			System.out.println("leftCount-rightCount:" + leftCount + "-" + rightCount);
-			return leftCount + rightCount;
-		} else if (leftCount != 0) {
-			System.out.println("leftCount" + leftCount);
-			return leftCount;
-		} else if (rightCount != 0) {
-			System.out.println("rightCount:" + rightCount);
-			return rightCount;
+
+			int rightCount = rightEncoder.get();
+			if (leftCount != 0 & rightCount != 0) {
+				System.out.println("leftCount-rightCount:" + leftCount + "-" + rightCount);
+				return leftCount + rightCount;
+			} else if (leftCount != 0) {
+				System.out.println("leftCount" + leftCount);
+				return leftCount;
+			} else if (rightCount != 0) {
+				System.out.println("rightCount:" + rightCount);
+				return rightCount;
+			} else {
+				return 0;
+			}
 		} else {
-			return 0;
-		} } else {
 			return 0;
 		}
 
