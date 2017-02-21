@@ -70,11 +70,12 @@ public class DriveTrain extends Subsystem {
 		System.out.println("Distance per pulse, Left-Right: " + RobotMap.leftDistancePerPulse + '-'
 				+ RobotMap.rightDistancePerPulse);
 		if (!Robot.isReal()) {
-			gyro = new AnalogGyro(2);
+			gyro = new AnalogGyro(1);
 			frontLeftMotor = new Talon(1);
 			rearLeftMotor = new Talon(2);
 			frontRightMotor = new Talon(3);
 			rearRightMotor = new Talon(4);
+			drive = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
 
 		} else {
 			gyro = new ADXRS450_Gyro();
@@ -82,8 +83,8 @@ public class DriveTrain extends Subsystem {
 			rearLeftMotor = new Talon(RobotMap.rearLeftMotor);
 			frontRightMotor = new Talon(RobotMap.frontRightMotor);
 			rearRightMotor = new Talon(RobotMap.rearRightMotor);
+			drive = new RobotDrive(frontLeftMotor, frontRightMotor);
 		}
-		drive = new RobotDrive(frontLeftMotor, frontRightMotor);
 	}
 
 	@Override
