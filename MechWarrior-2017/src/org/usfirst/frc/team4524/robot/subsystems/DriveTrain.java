@@ -135,7 +135,9 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public int getEncoderCount() {
-		int leftCount = leftEncoder.get();
+		if (Robot.isReal()){
+			int leftCount = leftEncoder.get();
+		
 		int rightCount = rightEncoder.get();
 		if (leftCount != 0 & rightCount != 0) {
 			System.out.println("leftCount-rightCount:" + leftCount + "-" + rightCount);
@@ -147,6 +149,8 @@ public class DriveTrain extends Subsystem {
 			System.out.println("rightCount:" + rightCount);
 			return rightCount;
 		} else {
+			return 0;
+		} } else {
 			return 0;
 		}
 
