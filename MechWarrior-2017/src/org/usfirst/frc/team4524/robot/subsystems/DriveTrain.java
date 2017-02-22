@@ -64,11 +64,10 @@ public class DriveTrain extends Subsystem {
 	// here. Call these from Commands.
 	public DriveTrain() {
 		super();
-		final double distancePerPulse = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION / ENCODER_GEAR_RATIO
-				/ GEAR_RATIO * FUDGE_FACTOR;
-		leftEncoder.setDistancePerPulse(distancePerPulse);
-		rightEncoder.setDistancePerPulse(distancePerPulse);
-		System.out.println("Distance per pulse: " + distancePerPulse);
+		leftEncoder.setDistancePerPulse(RobotMap.leftDistancePerPulse);
+		rightEncoder.setDistancePerPulse(RobotMap.rightDistancePerPulse);
+		System.out.println("Distance per pulse, Left-Right: " + RobotMap.leftDistancePerPulse + '-'
+				+ RobotMap.rightDistancePerPulse);
 		if (!Robot.isReal()) {
 			gyro = new AnalogGyro(2);
 		} else {
@@ -132,7 +131,7 @@ public class DriveTrain extends Subsystem {
 	 * @return The distance driven (average of left and right encoders).
 	 */
 	public double getDistance() {
-		 return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
+		return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
 	}
 
 	public int getEncoderCount() {
