@@ -27,25 +27,25 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 /**
  *
  */
 public class DriveTrain extends Subsystem {
 
-	private SpeedController frontLeftMotor = new Talon(RobotMap.frontLeftMotor);
-	private SpeedController rearLeftMotor = new Talon(RobotMap.rearLeftMotor);
-	private SpeedController frontRightMotor = new Talon(RobotMap.frontRightMotor);
-	private SpeedController rearRightMotor = new Talon(RobotMap.rearRightMotor);
-	private RobotDrive drive = new RobotDrive(frontLeftMotor, frontRightMotor);
+	private SpeedController frontLeftMotor;
+	private SpeedController rearLeftMotor;
+	private SpeedController frontRightMotor;
+	private SpeedController rearRightMotor;
+	private RobotDrive drive;
 
+	private Gyro gyro;
 	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderChannel1, RobotMap.leftEncoderChannel2, true,
 			EncodingType.k4X);
 	private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderChannel1, RobotMap.rightEncoderChannel2, true,
 			EncodingType.k4X);
 	private AnalogInput rangefinder = new AnalogInput(RobotMap.rangefinder);
-	// private AnalogGyro gyro = new AnalogGyro(RobotMap.gyro);
-	private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 
 	public static final double WHEEL_DIAMETER = 6;
 	public static final double PULSE_PER_REVOLUTION = 360;
@@ -65,12 +65,26 @@ public class DriveTrain extends Subsystem {
 	// here. Call these from Commands.
 	public DriveTrain() {
 		super();
-		final double distancePerPulse = Math.PI * WHEEL_DIAMETER / PULSE_PER_REVOLUTION / ENCODER_GEAR_RATIO
-				/ GEAR_RATIO * FUDGE_FACTOR;
-		leftEncoder.setDistancePerPulse(distancePerPulse);
-		rightEncoder.setDistancePerPulse(distancePerPulse);
-		System.out.println("Distance per pulse: " + distancePerPulse);
+		leftEncoder.setDistancePerPulse(RobotMap.leftDistancePerPulse);
+		rightEncoder.setDistancePerPulse(RobotMap.rightDistancePerPulse);
+		System.out.println("Distance per pulse, Left-Right: " + RobotMap.leftDistancePerPulse + '-'
+				+ RobotMap.rightDistancePerPulse);
+		if (!Robot.isReal()) {
+			gyro = new AnalogGyro(1);
+			frontLeftMotor = new Talon(1);
+			rearLeftMotor = new Talon(2);
+			frontRightMotor = new Talon(3);
+			rearRightMotor = new Talon(4);
+			drive = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
 
+		} else {
+			gyro = new ADXRS450_Gyro();
+			frontLeftMotor = new Talon(RobotMap.frontLeftMotor);
+			rearLeftMotor = new Talon(RobotMap.rearLeftMotor);
+			frontRightMotor = new Talon(RobotMap.frontRightMotor);
+			rearRightMotor = new Talon(RobotMap.rearRightMotor);
+			drive = new RobotDrive(frontLeftMotor, frontRightMotor);
+		}
 	}
 
 	@Override
@@ -120,11 +134,38 @@ public class DriveTrain extends Subsystem {
 		rightEncoder.reset();
 	}
 
+	public void gyroCalibrate() {
+		gyro.calibrate();
+	}
+
 	/**
 	 * @return The distance driven (average of left and right encoders).
 	 */
 	public double getDistance() {
 		return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
+	}
+
+	public int getEncoderCount() {
+		if (Robot.isReal()) {
+			int leftCount = leftEncoder.get();
+
+			int rightCount = rightEncoder.get();
+			if (leftCount != 0 & rightCount != 0) {
+				System.out.println("leftCount-rightCount:" + leftCount + "-" + rightCount);
+				return leftCount + rightCount;
+			} else if (leftCount != 0) {
+				System.out.println("leftCount" + leftCount);
+				return leftCount;
+			} else if (rightCount != 0) {
+				System.out.println("rightCount:" + rightCount);
+				return rightCount;
+			} else {
+				return 0;
+			}
+		} else {
+			return 0;
+		}
+
 	}
 
 	/**
@@ -134,13 +175,23 @@ public class DriveTrain extends Subsystem {
 		// Really meters in simulation since it's a rangefinder...
 		return rangefinder.getAverageVoltage();
 	}
-	
-	public void invertDrive(boolean reverse){
-		/*drive.setInvertedMotor(MotorType.kFrontLeft, reverse);
-    	drive.setInvertedMotor(MotorType.kFrontRight, reverse);
-    	drive.setInvertedMotor(MotorType.kRearLeft, reverse);
-    	drive.setInvertedMotor(MotorType.kRearRight, reverse);*/
-    }
 
+	public void stop() {
+		drive.tankDrive(0, 0);
+	}
+
+	public void invertDrive(boolean reverse) {
+		if (Robot.isReal()) {
+			frontLeftMotor.setInverted(reverse);
+			frontRightMotor.setInverted(reverse);
+			rearLeftMotor.setInverted(reverse);
+			rearRightMotor.setInverted(reverse);
+		} else {
+			drive.setInvertedMotor(MotorType.kFrontLeft, reverse);
+			drive.setInvertedMotor(MotorType.kFrontRight, reverse);
+			drive.setInvertedMotor(MotorType.kRearLeft, reverse);
+			drive.setInvertedMotor(MotorType.kRearRight, reverse);
+		}
+	}
 
 }

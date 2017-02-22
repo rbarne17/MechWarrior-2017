@@ -10,16 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Reverse extends Command {
 
 	public Reverse() {
-		requires(Robot.driveTrain);
-<<<<<<< HEAD
-=======
-	}>>>>>>>refs/remotes/origin/Solomon
-
-	<<<<<<<HEAD
 
 	}
-
-	=======>>>>>>>refs/remotes/origin/Solomon
 
 	@Override
 	protected void initialize() {
@@ -46,7 +38,6 @@ public class Reverse extends Command {
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-
 		Robot.driveTrain.invertDrive(false);
 	}
 
