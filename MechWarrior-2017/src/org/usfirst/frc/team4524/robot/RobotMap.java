@@ -31,8 +31,10 @@ public class RobotMap {
 	public static final int rangefinder = 6;
 	public static final int gyro = 1;
 	
-	public static final double leftDistancePerPulse = .00610 ;
-	public static final double rightDistancePerPulse = 0.00435;
+	//public static final double leftDistancePerPulse = .00610 ; //Old Robot
+	//public static final double rightDistancePerPulse = 0.00435;//Old Robot
+	  public static final double leftDistancePerPulse = .00442;
+	  public static final double rightDistancePerPulse = .00442;
 
 
 	public static void init() {

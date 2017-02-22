@@ -11,8 +11,8 @@ import org.usfirst.frc.team4524.robot.commands.PrintPath;
 public class AutonomousPath1a extends CommandGroup {
 	public AutonomousPath1a() {
 		addSequential(new PrintPath("Path 1a"));
-//		addSequential(new DriveForward(2));
-		addSequential(new TurnHeading(45,"right"));
+		addSequential(new DriveForward(2));
+		//addSequential(new TurnHeading(45,"right"));
 //		addSequential(new DriveForward(5));
 	}
 }

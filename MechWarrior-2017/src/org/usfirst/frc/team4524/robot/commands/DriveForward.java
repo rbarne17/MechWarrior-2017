@@ -12,7 +12,6 @@ import org.usfirst.frc.team4524.robot.Robot;
 public class DriveForward extends Command {
 	private double driveForwardSpeed;
 	private double distance;
-	private final double fps = 9.3888; //full speed
 	private Timer timer = new Timer();
 	private double error;
 	private final double kTolerance = 0.1;
@@ -42,23 +41,24 @@ public class DriveForward extends Command {
 
 	@Override
 	protected void execute() {
-		System.out.println(Math.abs(((timer.get() / fps) * driveForwardSpeed)));
-		Robot.driveTrain.drive(driveForwardSpeed,driveForwardSpeed);
-//		error = (distance - Robot.driveTrain.getDistance());
-//		if (driveForwardSpeed * kP * error >= driveForwardSpeed) {
-//			Robot.driveTrain.drive(driveForwardSpeed, driveForwardSpeed);
-//		} else {
-//			Robot.driveTrain.drive(driveForwardSpeed * kP * error, driveForwardSpeed * kP * error);
-//		}
+		System.out.println(Math.abs(Robot.driveTrain.getDistance()));
+		Robot.driveTrain.drive(driveForwardSpeed, driveForwardSpeed);
+		// error = (distance - Robot.driveTrain.getDistance());
+		// if (driveForwardSpeed * kP * error >= driveForwardSpeed) {
+		// Robot.driveTrain.drive(driveForwardSpeed, driveForwardSpeed);
+		// } else {
+		// Robot.driveTrain.drive(driveForwardSpeed * kP * error,
+		// driveForwardSpeed * kP * error);
+		// }
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return (Math.abs(((timer.get() * fps) / driveForwardSpeed)) >= distance);
+		return (Math.abs((Robot.driveTrain.getDistance())) >= distance);
 	}
 
 	@Override
 	protected void end() {
-		Robot.driveTrain.drive(0.0,0.0);
+		Robot.driveTrain.drive(0.0, 0.0);
 	}
 }

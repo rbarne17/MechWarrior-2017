@@ -49,7 +49,6 @@ public class Camera extends Subsystem {
 		});
 		visionThread.setDaemon(true);
 		visionThread.start();
-
 	}
 
 }
