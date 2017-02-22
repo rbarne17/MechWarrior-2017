@@ -44,7 +44,7 @@ public class TurnHeading extends Command {
 
 	@Override
 	protected void initialize() {
-		// Robot.driveTrain.getRightEncoder().reset();
+		Robot.driveTrain.reset();
 		// setTimeout(2);
 		targetHeading = Robot.driveTrain.getHeading() + angle;
 
@@ -64,7 +64,7 @@ public class TurnHeading extends Command {
 	protected boolean isFinished() {
 		double presentHeading = Robot.driveTrain.getHeading();
 		// return Robot.driveTrain.getHeading() < targetHeading || isTimedOut();
-		return presentHeading > targetHeading;
+		return Math.abs(presentHeading) > targetHeading;
 	}
 
 	@Override
