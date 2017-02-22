@@ -13,8 +13,22 @@ import org.usfirst.frc.team4524.robot.Robot;
  */
 public class DriveWithJoystick extends Command {
 
+	private boolean forward;
+
 	public DriveWithJoystick() {
 		requires(Robot.driveTrain);
+		forward = true;
+
+	}
+
+	public DriveWithJoystick(boolean forward) {
+		requires(Robot.driveTrain);
+		this.forward = forward;
+	}
+
+	@Override
+	protected void initialize() {
+		Robot.driveTrain.invertDrive(forward);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -32,6 +46,6 @@ public class DriveWithJoystick extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.driveTrain.drive(0, 0);
+		Robot.driveTrain.stop();
 	}
 }
