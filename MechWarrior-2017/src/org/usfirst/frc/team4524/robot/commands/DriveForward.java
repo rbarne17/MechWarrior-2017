@@ -15,7 +15,8 @@ public class DriveForward extends Command {
 	private Timer timer = new Timer();
 	private double error;
 	private final double kTolerance = 0.1;
-	private final double kP = -1.0 / 5.0;
+	private final double motorkP = -1.0 / 5.0;
+	private final double gyrokP = .03;
 
 	public DriveForward() {
 		this(10, 0.5);
@@ -43,9 +44,21 @@ public class DriveForward extends Command {
 	protected void execute() {
 		System.out.println(Math.abs(Robot.driveTrain.getDistance()));
 		if (Robot.robotChoice == "goodrobot") {
-			Robot.driveTrain.drive(driveForwardSpeed, driveForwardSpeed, "tankDrive");
+			error = (distance - Robot.driveTrain.getDistance());
+			if (driveForwardSpeed * motorkP * error >= driveForwardSpeed) {
+				Robot.driveTrain.drive(driveForwardSpeed, driveForwardSpeed, "tankDrive");
+			} else {
+				Robot.driveTrain.drive(driveForwardSpeed * motorkP * error, driveForwardSpeed * motorkP * error,
+						"tankDrive");
+			}
 		} else {
-			Robot.driveTrain.drive(driveForwardSpeed, driveForwardSpeed, "tankDrive");
+			error = (distance - Robot.driveTrain.getDistance());
+			double angle = Robot.driveTrain.getHeading(); // get current heading
+			if (driveForwardSpeed * motorkP * error >= driveForwardSpeed) {
+				Robot.driveTrain.drive(driveForwardSpeed, -angle * gyrokP, "arcadeDrive");
+			} else {
+				Robot.driveTrain.drive(driveForwardSpeed * motorkP * error, -angle * gyrokP, "arcadeDrive");
+			}
 		}
 	}
 
