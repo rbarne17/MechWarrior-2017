@@ -68,7 +68,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(driveTrain);
 		SmartDashboard.putData(fuelPickup);
 
-		autoPathChooser.addObject(pathDefault, new AutonomousPathDefault());
+		autoPathChooser.addDefault(pathDefault, new AutonomousPathDefault());
 		autoPathChooser.addObject(path1a, new AutonomousPath1a());
 		autoPathChooser.addObject(path1b, new AutonomousPath1b());
 		autoPathChooser.addObject(path1c, new AutonomousPath1c());

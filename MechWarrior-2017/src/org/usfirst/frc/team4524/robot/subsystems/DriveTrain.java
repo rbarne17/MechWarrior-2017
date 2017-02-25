@@ -39,6 +39,7 @@ public class DriveTrain extends Subsystem {
 	private SpeedController frontRightMotor;
 	private SpeedController rearRightMotor;
 	private RobotDrive drive;
+	private boolean reverse = false;
 
 	private Gyro gyro;
 	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderChannel1, RobotMap.leftEncoderChannel2, true,
@@ -120,7 +121,11 @@ public class DriveTrain extends Subsystem {
 	 *            The ps3 style joystick to use to drive tank style.
 	 */
 	public void drive(Joystick joy) {
-		drive.arcadeDrive(joy);
+		if (reverse == true) {
+			drive.arcadeDrive(joy.getY(), -joy.getX());
+		} else {
+			drive.arcadeDrive(joy.getY(), joy.getX());
+		}
 	}
 
 	/**
@@ -186,6 +191,7 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public void invertDrive(boolean reverse) {
+		this.reverse = reverse;
 		if (Robot.isReal()) {
 			frontLeftMotor.setInverted(reverse);
 			frontRightMotor.setInverted(reverse);

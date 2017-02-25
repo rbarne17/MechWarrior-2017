@@ -34,6 +34,7 @@ public class DriveForward extends Command {
 
 	@Override
 	protected void initialize() {
+		System.out.println(Robot.driveTrain.getHeading());
 		Robot.driveTrain.reset();
 		timer.reset();
 		timer.start();
@@ -64,11 +65,12 @@ public class DriveForward extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return (Math.abs((Robot.driveTrain.getDistance())) >= distance);
+		return (Math.abs((Robot.driveTrain.getDistance())) >= distance) || (Math.abs(Robot.driveTrain.getHeading()) >= 10);
 	}
 
 	@Override
 	protected void end() {
+		System.out.println(Robot.driveTrain.getHeading());
 		Robot.driveTrain.stop();
 	}
 }
