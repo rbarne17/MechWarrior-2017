@@ -42,14 +42,11 @@ public class DriveForward extends Command {
 	@Override
 	protected void execute() {
 		System.out.println(Math.abs(Robot.driveTrain.getDistance()));
-		Robot.driveTrain.drive(driveForwardSpeed, driveForwardSpeed);
-		// error = (distance - Robot.driveTrain.getDistance());
-		// if (driveForwardSpeed * kP * error >= driveForwardSpeed) {
-		// Robot.driveTrain.drive(driveForwardSpeed, driveForwardSpeed);
-		// } else {
-		// Robot.driveTrain.drive(driveForwardSpeed * kP * error,
-		// driveForwardSpeed * kP * error);
-		// }
+		if (Robot.robotChoice == "goodrobot") {
+			Robot.driveTrain.drive(driveForwardSpeed, driveForwardSpeed, "tankDrive");
+		} else {
+			Robot.driveTrain.drive(driveForwardSpeed, driveForwardSpeed, "tankDrive");
+		}
 	}
 
 	@Override
@@ -59,6 +56,6 @@ public class DriveForward extends Command {
 
 	@Override
 	protected void end() {
-		Robot.driveTrain.drive(0.0, 0.0);
+		Robot.driveTrain.stop();
 	}
 }

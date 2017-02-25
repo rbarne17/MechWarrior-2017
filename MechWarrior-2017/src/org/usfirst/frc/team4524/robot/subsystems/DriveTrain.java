@@ -106,8 +106,13 @@ public class DriveTrain extends Subsystem {
 	 * @param right
 	 *            Speed in range [-1,1]
 	 */
-	public void drive(double left, double right) {
-		drive.tankDrive(left, right);
+	public void drive(double left, double right, String mode) {
+		if (mode == "tankDrive") {
+			drive.tankDrive(left, right);
+		} else {
+			drive.arcadeDrive(left, right);
+		}
+
 	}
 
 	/**
