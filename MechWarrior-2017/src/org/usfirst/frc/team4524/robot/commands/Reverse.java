@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Reverse extends Command {
 
 	public Reverse() {
-		requires(Robot.driveTrain);
+
 	}
 
 	@Override
