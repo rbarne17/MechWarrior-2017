@@ -16,7 +16,7 @@ public class DriveForward extends Command {
 	private double error;
 	private final double kTolerance = 0.1;
 	private final double motorkP = -1.0 / 5.0;
-	private final double gyrokP = .03;
+	private final double gyrokP = .225;
 
 	public DriveForward() {
 		this(10, 0.5);
@@ -45,7 +45,7 @@ public class DriveForward extends Command {
 	protected void execute() {
 		System.out.println("Distance:" + Math.abs(Robot.driveTrain.getDistance()));
 		double angle = Robot.driveTrain.getHeading(); // get current heading
-		System.out.println("Angle:" + angle);
+		System.out.println("Angle:" + angle + ":Correction:" + -angle*gyrokP);
 		if (Robot.robotChoice == "goodrobot") {
 			error = (distance - Robot.driveTrain.getDistance());
 			if (driveForwardSpeed * motorkP * error >= driveForwardSpeed) {
@@ -57,9 +57,9 @@ public class DriveForward extends Command {
 		} else {
 			error = (distance - Robot.driveTrain.getDistance());
 			if (driveForwardSpeed * motorkP * error >= driveForwardSpeed) {
-				Robot.driveTrain.drive(driveForwardSpeed, -angle * gyrokP, "arcadeDrive");
+				Robot.driveTrain.drive(driveForwardSpeed, angle * gyrokP, "arcadeDrive");
 			} else {
-				Robot.driveTrain.drive(driveForwardSpeed * motorkP * error, -angle * gyrokP, "arcadeDrive");
+				Robot.driveTrain.drive(driveForwardSpeed * motorkP * error, angle * gyrokP, "arcadeDrive");
 			}
 		}
 	}
