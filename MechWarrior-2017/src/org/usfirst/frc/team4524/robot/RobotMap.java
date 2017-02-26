@@ -29,17 +29,30 @@ public class RobotMap {
 	public static final int rightEncoderChannel1 = 3;
 	public static final int rightEncoderChannel2 = 2;
 	public static final int rangefinder = 6;
-	public static final int gyro = 1;
+
+	public static int gyro;
+	private static final int gearBotsGyro = 1;
+	private static final int pacGyro = 2;
 
 	public static double leftDistancePerPulse;
 	public static double rightDistancePerPulse;
-	private static final double badLeftDistancePerPulse = .00610; 
+	private static final double badLeftDistancePerPulse = .00610;
 	private static final double badRightDistancePerPulse = 0.00435;
 	private static final double goodLeftDistancePerPulse = .00442;
 	private static final double goodRightDistancePerPulse = .00442;
 
 	public static void init() {
-		if (Robot.robotChoice == "goodrobot") {
+		if (!Robot.isReal()) { // Converts to feet
+			leftDistancePerPulse = (4.0/* in */ * Math.PI)
+					/ (360.0 * 12.0/* in/ft */);
+			rightDistancePerPulse = (4.0/* in */ * Math.PI)
+					/ (360.0 * 12.0/* in/ft */);
+			if (Robot.robotChoice == "pacgoat") {
+				gyro = pacGyro;
+			} else if (Robot.robotChoice == "gearbots") {
+				gyro = gearBotsGyro;
+			}
+		} else if (Robot.robotChoice == "goodrobot") {
 			leftDistancePerPulse = goodLeftDistancePerPulse;
 			rightDistancePerPulse = goodRightDistancePerPulse;
 		} else {

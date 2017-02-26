@@ -71,7 +71,7 @@ public class DriveTrain extends Subsystem {
 		System.out.println("Distance per pulse, Left-Right: " + RobotMap.leftDistancePerPulse + '-'
 				+ RobotMap.rightDistancePerPulse);
 		if (!Robot.isReal()) {
-			gyro = new AnalogGyro(1);
+			gyro = new AnalogGyro(RobotMap.gyro);
 			frontLeftMotor = new Talon(1);
 			rearLeftMotor = new Talon(2);
 			frontRightMotor = new Talon(3);

@@ -43,7 +43,9 @@ public class DriveForward extends Command {
 
 	@Override
 	protected void execute() {
-		System.out.println(Math.abs(Robot.driveTrain.getDistance()));
+		System.out.println("Distance:" + Math.abs(Robot.driveTrain.getDistance()));
+		double angle = Robot.driveTrain.getHeading(); // get current heading
+		System.out.println("Angle:" + angle);
 		if (Robot.robotChoice == "goodrobot") {
 			error = (distance - Robot.driveTrain.getDistance());
 			if (driveForwardSpeed * motorkP * error >= driveForwardSpeed) {
@@ -54,7 +56,6 @@ public class DriveForward extends Command {
 			}
 		} else {
 			error = (distance - Robot.driveTrain.getDistance());
-			double angle = Robot.driveTrain.getHeading(); // get current heading
 			if (driveForwardSpeed * motorkP * error >= driveForwardSpeed) {
 				Robot.driveTrain.drive(driveForwardSpeed, -angle * gyrokP, "arcadeDrive");
 			} else {
@@ -65,7 +66,8 @@ public class DriveForward extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return (Math.abs((Robot.driveTrain.getDistance())) >= distance) || (Math.abs(Robot.driveTrain.getHeading()) >= 10);
+		return (Math.abs((Robot.driveTrain.getDistance())) >= distance)
+				|| (Math.abs(Robot.driveTrain.getHeading()) >= 10);
 	}
 
 	@Override
