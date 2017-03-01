@@ -29,6 +29,7 @@ public class FuelDropDown extends Command {
 	@Override
 	protected void execute() {
 		Robot.fuelPickup.down();
+		System.out.println(Robot.fuelPickup.getVoltage());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

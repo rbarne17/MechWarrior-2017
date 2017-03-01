@@ -37,6 +37,8 @@ public class OI {
 
 	public OI() {
 		button7.toggleWhenPressed(new DriveWithJoystick(false));
+		buttonA.toggleWhenPressed(new FuelDropUp());
+		buttonB.toggleWhenPressed(new FuelDropDown());
 		SmartDashboard.putData("Run Path 1a", new AutonomousPath1a());
 		SmartDashboard.putData("Drive Forward", new DriveForward(2));
 		SmartDashboard.putData("Turn 45 Degrees", new TurnHeading(45));

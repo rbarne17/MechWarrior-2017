@@ -15,9 +15,9 @@ public class FuelDropUp extends Command {
 
 	}
 
-	public FuelDropUp(boolean Down) {
+	public FuelDropUp(boolean Up) {
 		requires(Robot.fuelPickup);
-		this.Up= Up;
+		this.Up = Up;
 	}
 
 	@Override
