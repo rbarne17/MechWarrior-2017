@@ -55,7 +55,7 @@ public class RobotMap {
 		} else if (Robot.robotChoice == "goodrobot") {
 			leftDistancePerPulse = goodLeftDistancePerPulse;
 			rightDistancePerPulse = goodRightDistancePerPulse;
-		} else {
+		} else if (Robot.robotChoice == "badrobot") {
 			leftDistancePerPulse = badLeftDistancePerPulse;
 			rightDistancePerPulse = badRightDistancePerPulse;
 		}

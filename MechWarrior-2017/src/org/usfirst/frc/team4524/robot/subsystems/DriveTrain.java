@@ -152,13 +152,16 @@ public class DriveTrain extends Subsystem {
 	 * @return The distance driven (average of left and right encoders).
 	 */
 	public double getDistance() {
-		return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
+		if (Robot.robotChoice == "goodrobot"){
+			return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
+		} else {
+			return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
+		}
 	}
 
 	public int getEncoderCount() {
 		if (Robot.isReal()) {
 			int leftCount = leftEncoder.get();
-
 			int rightCount = rightEncoder.get();
 			if (leftCount != 0 & rightCount != 0) {
 				System.out.println("leftCount-rightCount:" + leftCount + "-" + rightCount);
