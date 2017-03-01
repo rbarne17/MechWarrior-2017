@@ -153,6 +153,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Encoder Count", encoderCount);
 		System.out.println("Encoder Count: " + encoderCount);
 		Scheduler.getInstance().run();
+		
 	}
 
 	/**
