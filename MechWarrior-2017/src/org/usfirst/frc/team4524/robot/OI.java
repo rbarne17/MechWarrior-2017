@@ -29,6 +29,11 @@ public class OI {
 			button7 = new JoystickButton(stick1, 7), button8 = new JoystickButton(stick1, 8),
 			button9 = new JoystickButton(stick1, 9), button10 = new JoystickButton(stick1, 10),
 			button11 = new JoystickButton(stick1, 11), button12 = new JoystickButton(stick1, 12);
+	//Joystick2(PS3 controller) buttons
+	Button buttonA = new JoystickButton(stick2, 1), buttonB = new JoystickButton(stick2, 2),
+			buttonX = new JoystickButton(stick2, 3), buttonY = new JoystickButton(stick2, 4),
+			buttonLB = new JoystickButton(stick2,5), buttonRB = new JoystickButton(stick2, 6),
+			buttonBack = new JoystickButton(stick2, 7), buttonStart = new JoystickButton(stick2, 8);
 
 	public OI() {
 		button7.toggleWhenPressed(new DriveWithJoystick(false));
