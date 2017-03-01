@@ -19,7 +19,7 @@ public class OI {
 		return stick1;
 	}
 
-	public Joystick getDriver2Joystick() {
+	public Joystick getDriverJoystick2() {
 		return stick2;
 	}
 
@@ -35,6 +35,6 @@ public class OI {
 		SmartDashboard.putData("Run Path 1a", new AutonomousPath1a());
 		SmartDashboard.putData("Drive Forward", new DriveForward(2));
 		SmartDashboard.putData("Turn 45 Degrees", new TurnHeading(45));
-		button8.toggleWhenPressed(new FuelDropUp.java(false));
+		
 	}
 }
