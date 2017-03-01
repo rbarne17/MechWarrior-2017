@@ -15,7 +15,8 @@ public class DriveForward extends Command {
 	private Timer timer = new Timer();
 	private double error;
 	private final double kTolerance = 0.1;
-	private final double kP = -1.0 / 5.0;
+	private final double motorkP = -1.0 / 5.0;
+	private final double gyrokP = .225;
 
 	public DriveForward() {
 		this(10, 0.5);
@@ -33,6 +34,7 @@ public class DriveForward extends Command {
 
 	@Override
 	protected void initialize() {
+		System.out.println(Robot.driveTrain.getHeading());
 		Robot.driveTrain.reset();
 		timer.reset();
 		timer.start();
@@ -41,24 +43,36 @@ public class DriveForward extends Command {
 
 	@Override
 	protected void execute() {
-		System.out.println(Math.abs(Robot.driveTrain.getDistance()));
-		Robot.driveTrain.drive(driveForwardSpeed, driveForwardSpeed);
-		// error = (distance - Robot.driveTrain.getDistance());
-		// if (driveForwardSpeed * kP * error >= driveForwardSpeed) {
-		// Robot.driveTrain.drive(driveForwardSpeed, driveForwardSpeed);
-		// } else {
-		// Robot.driveTrain.drive(driveForwardSpeed * kP * error,
-		// driveForwardSpeed * kP * error);
-		// }
+		System.out.println("Distance:" + Math.abs(Robot.driveTrain.getDistance()));
+		double angle = Robot.driveTrain.getHeading(); // get current heading
+		System.out.println("Angle:" + angle + ":Correction:" + -angle*gyrokP);
+		if (Robot.robotChoice == "goodrobot") {
+			error = (distance - Robot.driveTrain.getDistance());
+			if (driveForwardSpeed * motorkP * error >= driveForwardSpeed) {
+				Robot.driveTrain.drive(driveForwardSpeed, driveForwardSpeed, "tankDrive");
+			} else {
+				Robot.driveTrain.drive(driveForwardSpeed * motorkP * error, driveForwardSpeed * motorkP * error,
+						"tankDrive");
+			}
+		} else {
+			error = (distance - Robot.driveTrain.getDistance());
+			if (driveForwardSpeed * motorkP * error >= driveForwardSpeed) {
+				Robot.driveTrain.drive(driveForwardSpeed, angle * gyrokP, "arcadeDrive");
+			} else {
+				Robot.driveTrain.drive(driveForwardSpeed * motorkP * error, angle * gyrokP, "arcadeDrive");
+			}
+		}
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return (Math.abs((Robot.driveTrain.getDistance())) >= distance);
+		return (Math.abs((Robot.driveTrain.getDistance())) >= distance)
+				|| (Math.abs(Robot.driveTrain.getHeading()) >= 10);
 	}
 
 	@Override
 	protected void end() {
-		Robot.driveTrain.drive(0.0, 0.0);
+		System.out.println(Robot.driveTrain.getHeading());
+		Robot.driveTrain.stop();
 	}
 }

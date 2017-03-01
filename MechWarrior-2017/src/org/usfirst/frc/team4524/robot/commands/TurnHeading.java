@@ -45,7 +45,6 @@ public class TurnHeading extends Command {
 	@Override
 	protected void initialize() {
 		Robot.driveTrain.reset();
-		// setTimeout(2);
 		targetHeading = Robot.driveTrain.getHeading() + angle;
 
 	}
@@ -53,10 +52,9 @@ public class TurnHeading extends Command {
 	@Override
 	protected void execute() {
 		if (direction == "left") {
-			Robot.driveTrain.drive(driveReverseSpeed, driveForwardSpeed);
+			Robot.driveTrain.drive(driveReverseSpeed, driveForwardSpeed, "tankDrive");
 		} else {
-			Robot.driveTrain.drive(driveForwardSpeed, driveReverseSpeed);
-
+			Robot.driveTrain.drive(driveForwardSpeed, driveReverseSpeed, "tankDrive");
 		}
 	}
 
