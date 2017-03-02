@@ -30,12 +30,13 @@ public class FuelDropDown extends Command {
 	protected void execute() {
 		Robot.fuelPickup.down();
 		System.out.println(Robot.fuelPickup.getVoltage());
+		
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return (Robot.fuelPickup.getVoltage()>= 3.5);
+		return (Robot.fuelPickup.getVoltage()>= 2.0);
 		 // wait until 0v then stop
 	}
 
