@@ -152,6 +152,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		System.out.println(Robot.fuelPickup.getVoltage());
 		double encoderDistanceReading = Robot.driveTrain.getDistance();
 		int encoderCount = Robot.driveTrain.getEncoderCount();
 		SmartDashboard.putNumber("Encoder Reading", encoderDistanceReading);

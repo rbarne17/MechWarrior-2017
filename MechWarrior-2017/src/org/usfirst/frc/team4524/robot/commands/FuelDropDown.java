@@ -30,12 +30,13 @@ public class FuelDropDown extends Command {
 	protected void execute() {
 		Robot.fuelPickup.down();
 		System.out.println(Robot.fuelPickup.getVoltage());
+		
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return true;
+		return (Robot.fuelPickup.getVoltage()>= 2.0);
 		 // wait until 0v then stop
 	}
 
@@ -45,3 +46,4 @@ public class FuelDropDown extends Command {
 		Robot.fuelPickup.stop();
 	}
 }
+>>>>>>> refs/heads/Solomon
