@@ -48,13 +48,13 @@ public class FuelPickupDropoff extends Subsystem {
     }
     
     public void down(){
-    	fuelPickUpDropOffController.set(-.5);;
+    	fuelPickupDropoffController.set(-.5);;
     	 }
     public void up(){
-    	fuelPickUpDropOffController.set(.5);
+    	fuelPickupDropoffController.set(.5);
     }
     public void stop(){
-    	fuelPickUpDropOffController.set(.0);
+    	fuelPickupDropoffController.set(.0);
     }
     
     public double getVoltage(){

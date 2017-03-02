@@ -46,4 +46,3 @@ public class FuelDropDown extends Command {
 		Robot.fuelPickup.stop();
 	}
 }
->>>>>>> refs/heads/Solomon
