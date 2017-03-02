@@ -40,7 +40,7 @@ public class Robot extends IterativeRobot {
 	final String path3c = "Path 3c";
 	
 	// what robot are we using?
-	public static final String robotChoice = "badrobot"; // pacgoat,gearbots,badrobot,goodrobot
+	public static final String robotChoice = "goodrobot"; // pacgoat,gearbots,badrobot,goodrobot
 
 	public SendableChooser<Command> autoPathChooser = new SendableChooser<>();
 	Timer timer = new Timer();
