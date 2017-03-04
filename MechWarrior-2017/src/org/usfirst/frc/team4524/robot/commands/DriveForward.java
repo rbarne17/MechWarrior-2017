@@ -49,9 +49,9 @@ public class DriveForward extends Command {
 		if (Robot.robotChoice == "goodrobot") {
 			error = (distance - Robot.driveTrain.getDistance());
 			if (driveForwardSpeed * motorkP * error >= driveForwardSpeed) {
-				Robot.driveTrain.drive(driveForwardSpeed, driveForwardSpeed, "tankDrive");
+				Robot.driveTrain.drive(driveForwardSpeed - (angle * gyrokP), driveForwardSpeed + (angle * gyrokP), "tankDrive");
 			} else {
-				Robot.driveTrain.drive(driveForwardSpeed * motorkP * error, driveForwardSpeed * motorkP * error,
+				Robot.driveTrain.drive((driveForwardSpeed * motorkP * error)- (angle * gyrokP), (driveForwardSpeed * motorkP * error) +  (angle * gyrokP),
 						"tankDrive");
 			}
 		} else {
