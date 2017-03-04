@@ -29,12 +29,14 @@ public class FuelDropUp extends Command {
 	@Override
 	protected void execute() {
 		Robot.fuelPickup.up();
+		System.out.println(Robot.fuelPickup.getVoltage());
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return true;
+		return (Robot.fuelPickup.getVoltage()>= 2.0);
 		 // wait until 0v then stop
 	}
 

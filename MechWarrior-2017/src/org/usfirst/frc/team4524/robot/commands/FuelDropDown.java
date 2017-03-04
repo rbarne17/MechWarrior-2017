@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team4524.robot.Robot;
 
-
 public class FuelDropDown extends Command {
 
 	private boolean Down;
@@ -22,7 +21,7 @@ public class FuelDropDown extends Command {
 
 	@Override
 	protected void initialize() {
-		
+
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -30,21 +29,19 @@ public class FuelDropDown extends Command {
 	protected void execute() {
 		Robot.fuelPickup.down();
 		System.out.println(Robot.fuelPickup.getVoltage());
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return true;
-		 // wait until 0v then stop
+		return (Robot.fuelPickup.getVoltage() >= 2.0);
+		// wait until 0v then stop
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
 		Robot.fuelPickup.stop();
-	}
-	protected void lift() {
-		
 	}
 }

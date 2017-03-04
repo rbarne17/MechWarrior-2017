@@ -18,20 +18,21 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-
 /**
  *
  */
 public class FuelPickupDropoff extends Subsystem {
 
-	private SpeedController fuelPickUpDropOffController;
+	private SpeedController fuelPickupDropoffController;
 	private AnalogInput analogInput;
 	
-		public FuelPickupDropoff(){
-			fuelPickUpDropOffController = new Talon(RobotMap.fuelPickupDropoffController);
-			analogInput = new AnalogInput(RobotMap.analogInput);
-		}
+	public FuelPickupDropoff(){
+		fuelPickupDropoffController = new Talon(RobotMap.fuelPickupDropoffController);
+		analogInput = new AnalogInput(RobotMap.analogInput);
+	}
 	
+	
+
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
@@ -47,14 +48,15 @@ public class FuelPickupDropoff extends Subsystem {
     }
     
     public void down(){
-    	
+    	fuelPickupDropoffController.set(-.5);;
     	 }
     public void up(){
-    	
+    	fuelPickupDropoffController.set(.5);
     }
     public void stop(){
-    	
+    	fuelPickupDropoffController.set(.0);
     }
+    
     public double getVoltage(){
     	return analogInput.getVoltage();
     }

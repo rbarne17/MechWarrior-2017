@@ -67,6 +67,7 @@ public class TurnHeading extends Command {
 
 	@Override
 	protected void end() {
+		System.out.println("Angle at end of turn:" + Robot.driveTrain.getHeading());
 		Robot.driveTrain.stop();
 	}
 }

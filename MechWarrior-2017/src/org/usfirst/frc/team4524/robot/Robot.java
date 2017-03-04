@@ -119,8 +119,14 @@ public class Robot extends IterativeRobot {
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 		double encoderDistanceReading = Robot.driveTrain.getDistance();
-		SmartDashboard.putNumber("Encoder Reading", encoderDistanceReading);
-
+		int encoderCount = Robot.driveTrain.getEncoderCount();
+		double heading = Robot.driveTrain.getHeading();
+		SmartDashboard.putNumber("Encoder Distance", encoderDistanceReading);
+		System.out.println("Encoder Distance: " + encoderDistanceReading);
+		SmartDashboard.putNumber("Encoder Count", encoderCount);
+		System.out.println("Encoder Count: " + encoderCount);
+		SmartDashboard.putNumber("Heading", heading);
+		System.out.println("Heading: " + heading);
 	}
 
 	@Override
@@ -146,6 +152,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		System.out.println(Robot.fuelPickup.getVoltage());
 		double encoderDistanceReading = Robot.driveTrain.getDistance();
 		int encoderCount = Robot.driveTrain.getEncoderCount();
 		SmartDashboard.putNumber("Encoder Reading", encoderDistanceReading);

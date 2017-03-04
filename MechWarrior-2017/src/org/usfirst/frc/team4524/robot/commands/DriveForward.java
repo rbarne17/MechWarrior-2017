@@ -16,7 +16,7 @@ public class DriveForward extends Command {
 	private double error;
 	private final double kTolerance = 0.1;
 	private final double motorkP = -1.0 / 5.0;
-	private final double gyrokP = .225;
+	private final double gyrokP = .15;
 
 	public DriveForward() {
 		this(10, 0.5);
