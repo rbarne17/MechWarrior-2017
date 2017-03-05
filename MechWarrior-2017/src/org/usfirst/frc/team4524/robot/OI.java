@@ -51,6 +51,7 @@ public class OI {
 		SmartDashboard.putData("Run Path 3b", new AutonomousPath3b());
 		SmartDashboard.putData("Run Path 3c", new AutonomousPath3c());
 		SmartDashboard.putData("Drive Forward, 2 feet", new DriveForward(2));
+		SmartDashboard.putData("Drive Forward, 20 feet", new DriveForward(20));
 		SmartDashboard.putData("Turn 45 Degrees, Right", new TurnHeading(45, .6, "right"));
 		SmartDashboard.putData("Turn 45 Degrees, Left", new TurnHeading(45, .6, "left"));
 
