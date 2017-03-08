@@ -46,22 +46,22 @@ public class DriveForward extends Command {
 		System.out.println("Distance:" + Math.abs(Robot.driveTrain.getDistance()));
 		double angle = Robot.driveTrain.getHeading(); // get current heading
 		System.out.println("Angle:" + angle + ":Correction:" + -angle*gyrokP);
-		if (Robot.robotChoice == "goodrobot") {
+//		if (Robot.robotChoice == "goodrobot") {
 			error = (distance - Robot.driveTrain.getDistance());
 			if (driveForwardSpeed * motorkP * error >= driveForwardSpeed) {
-				Robot.driveTrain.drive(driveForwardSpeed, driveForwardSpeed, "tankDrive");
+				Robot.driveTrain.drive(driveForwardSpeed - (angle * gyrokP), driveForwardSpeed + (angle * gyrokP), "tankDrive");
 			} else {
-				Robot.driveTrain.drive(driveForwardSpeed * motorkP * error, driveForwardSpeed * motorkP * error,
+				Robot.driveTrain.drive((driveForwardSpeed * motorkP * error)- (angle * gyrokP), (driveForwardSpeed * motorkP * error) +  (angle * gyrokP),
 						"tankDrive");
 			}
-		} else {
-			error = (distance - Robot.driveTrain.getDistance());
-			if (driveForwardSpeed * motorkP * error >= driveForwardSpeed) {
-				Robot.driveTrain.drive(driveForwardSpeed, angle * gyrokP, "arcadeDrive");
-			} else {
-				Robot.driveTrain.drive(driveForwardSpeed * motorkP * error, angle * gyrokP, "arcadeDrive");
-			}
-		}
+//		} else {
+//			error = (distance - Robot.driveTrain.getDistance());
+//			if (driveForwardSpeed * motorkP * error >= driveForwardSpeed) {
+//				Robot.driveTrain.drive(driveForwardSpeed, angle * gyrokP, "arcadeDrive");
+//			} else {
+//				Robot.driveTrain.drive(driveForwardSpeed * motorkP * error, angle * gyrokP, "arcadeDrive");
+//			}
+//		}
 	}
 
 	@Override
