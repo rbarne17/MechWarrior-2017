@@ -45,7 +45,4 @@ public class FuelDropUp extends Command {
 	protected void end() {
 		Robot.fuelPickup.stop();
 	}
-	protected void lift() {
-		
-	}
 }

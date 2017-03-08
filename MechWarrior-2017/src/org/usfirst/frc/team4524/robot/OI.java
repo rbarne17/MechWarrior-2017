@@ -29,19 +29,31 @@ public class OI {
 			button7 = new JoystickButton(stick1, 7), button8 = new JoystickButton(stick1, 8),
 			button9 = new JoystickButton(stick1, 9), button10 = new JoystickButton(stick1, 10),
 			button11 = new JoystickButton(stick1, 11), button12 = new JoystickButton(stick1, 12);
-	//Joystick2(PS3 controller) buttons
+	// Joystick2(PS3 controller) buttons
 	Button buttonA = new JoystickButton(stick2, 1), buttonB = new JoystickButton(stick2, 2),
 			buttonX = new JoystickButton(stick2, 3), buttonY = new JoystickButton(stick2, 4),
-			buttonLB = new JoystickButton(stick2,5), buttonRB = new JoystickButton(stick2, 6),
+			buttonLB = new JoystickButton(stick2, 5), buttonRB = new JoystickButton(stick2, 6),
 			buttonBack = new JoystickButton(stick2, 7), buttonStart = new JoystickButton(stick2, 8);
 
 	public OI() {
 		button7.toggleWhenPressed(new DriveWithJoystick(false));
 		buttonA.toggleWhenPressed(new FuelDropUp());
-		button8.toggleWhenPressed(new FuelDropDown());
+		buttonB.toggleWhenPressed(new FuelDropDown());
+
+		SmartDashboard.putData("Run Path Default", new AutonomousPathDefault());
 		SmartDashboard.putData("Run Path 1a", new AutonomousPath1a());
-		SmartDashboard.putData("Drive Forward", new DriveForward(2));
-		SmartDashboard.putData("Turn 45 Degrees", new TurnHeading(45));
-		
+		SmartDashboard.putData("Run Path 1b", new AutonomousPath1b());
+		SmartDashboard.putData("Run Path 1c", new AutonomousPath1c());
+		SmartDashboard.putData("Run Path 2a", new AutonomousPath2a());
+		SmartDashboard.putData("Run Path 2b", new AutonomousPath2b());
+		SmartDashboard.putData("Run Path 2c", new AutonomousPath2c());
+		SmartDashboard.putData("Run Path 3a", new AutonomousPath3a());
+		SmartDashboard.putData("Run Path 3b", new AutonomousPath3b());
+		SmartDashboard.putData("Run Path 3c", new AutonomousPath3c());
+		SmartDashboard.putData("Drive Forward, 2 feet", new DriveForward(2));
+		SmartDashboard.putData("Drive Forward, 20 feet", new DriveForward(20));
+		SmartDashboard.putData("Turn 45 Degrees, Right", new TurnHeading(45, .6, "right"));
+		SmartDashboard.putData("Turn 45 Degrees, Left", new TurnHeading(45, .6, "left"));
+
 	}
 }

@@ -60,9 +60,5 @@ public class FuelPickupDropoff extends Subsystem {
     public double getVoltage(){
     	return analogInput.getVoltage();
     }
-    
-    public void lift(){
-    	
-    }
 }
 
