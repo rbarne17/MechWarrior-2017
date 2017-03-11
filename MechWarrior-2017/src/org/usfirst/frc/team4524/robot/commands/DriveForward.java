@@ -19,7 +19,7 @@ public class DriveForward extends Command {
 	private final double gyrokP = .15;
 
 	public DriveForward() {
-		this(10, 0.5);
+		this(10, 0.25);
 	}
 
 	public DriveForward(double dist) {
