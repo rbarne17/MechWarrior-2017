@@ -24,13 +24,14 @@ public class RobotMap {
 	public static final int rearLeftMotor = 2;
 	public static final int frontRightMotor = 1;
 	public static final int rearRightMotor = 4;
-	public static final int fuelPickupDropoffController = 3;
+	public static final int fuelPickupDropoffController = 3 ;
 	public static final int analogInput = 0;
 	public static final int leftEncoderChannel1 = 0;
 	public static final int leftEncoderChannel2 = 1;
 	public static final int rightEncoderChannel1 = 3;
 	public static final int rightEncoderChannel2 = 2;
 	public static final int rangefinder = 6;
+	public static final int ropseClimber = 0;
 
 	public static int gyro;
 	private static final int gearBotsGyro = 1;
