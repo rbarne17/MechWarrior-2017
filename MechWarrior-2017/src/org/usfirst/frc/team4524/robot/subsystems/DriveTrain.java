@@ -25,14 +25,14 @@ import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
-import edu.wpi.first.wpilibj.Joystick.AxisType;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 /**
  *
  */
-public class DriveTrain extends Subsystem {
+public class DriveTrain extends PIDSubsystem {
 
 	private SpeedController frontLeftMotor;
 	private SpeedController rearLeftMotor;
@@ -65,7 +65,7 @@ public class DriveTrain extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	public DriveTrain() {
-		super();
+		super("DriveTrain", 1.0,0.0,0.0);
 		leftEncoder.setDistancePerPulse(RobotMap.leftDistancePerPulse);
 		rightEncoder.setDistancePerPulse(RobotMap.rightDistancePerPulse);
 		System.out.println("Distance per pulse, Left-Right: " + RobotMap.leftDistancePerPulse + '-'
@@ -207,6 +207,18 @@ public class DriveTrain extends Subsystem {
 			drive.setInvertedMotor(MotorType.kRearLeft, reverse);
 			drive.setInvertedMotor(MotorType.kRearRight, reverse);
 		}
+	}
+
+	@Override
+	protected double returnPIDInput() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected void usePIDOutput(double output) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

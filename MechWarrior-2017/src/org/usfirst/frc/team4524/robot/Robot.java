@@ -49,6 +49,10 @@ public class Robot extends IterativeRobot {
 	public SendableChooser<Command> autoPathChooser = new SendableChooser<>();
 	Timer timer = new Timer();
 	double timerCount = 0;
+	// measurements
+	double encoderDistanceReading;
+	double heading;
+	double voltage;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -124,10 +128,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		double encoderDistanceReading = Robot.driveTrain.getDistance();
-		double voltage = Robot.fuelPickup.getVoltage();
+		encoderDistanceReading = Robot.driveTrain.getDistance();
+		voltage = Robot.fuelPickup.getVoltage();
 		int encoderCount = Robot.driveTrain.getEncoderCount();
-		double heading = Robot.driveTrain.getHeading();
+		heading = Robot.driveTrain.getHeading();
 		SmartDashboard.putNumber("Encoder Distance", encoderDistanceReading);
 		System.out.println("Encoder Distance: " + encoderDistanceReading);
 		SmartDashboard.putNumber("Encoder Count", encoderCount);
@@ -164,10 +168,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		double encoderDistanceReading = Robot.driveTrain.getDistance();
-		double voltage = Robot.fuelPickup.getVoltage();
+		encoderDistanceReading = Robot.driveTrain.getDistance();
+		voltage = Robot.fuelPickup.getVoltage();
 		int encoderCount = Robot.driveTrain.getEncoderCount();
-		double heading = Robot.driveTrain.getHeading();
+		heading = Robot.driveTrain.getHeading();
 		SmartDashboard.putNumber("Encoder Reading", encoderDistanceReading);
 		System.out.println("Encoder Distance: " + encoderDistanceReading);
 		SmartDashboard.putNumber("Encoder Count", encoderCount);
