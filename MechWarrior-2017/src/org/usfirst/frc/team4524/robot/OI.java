@@ -5,6 +5,8 @@ import org.usfirst.frc.team4524.robot.commands.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -14,6 +16,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OI {
 	Joystick stick1 = new Joystick(0);
 	Joystick stick2 = new Joystick(1);
+
+	final String pathDefault = "Default Path";
+	final String path1a = "Path 1a";
+	final String path1b = "Path 1b";
+	final String path1c = "Path 1c";
+	final String path2a = "Path 2a";
+	final String path2b = "Path 2b";
+	final String path2c = "Path 2c";
+	final String path3a = "Path 3a";
+	final String path3b = "Path 3b";
+	final String path3c = "Path 3c";
+
+	public Command autonomousCommand;
+	public SendableChooser<Command> autoPathChooser;
 
 	public Joystick getDriverJoystick1() {
 		return stick1;
@@ -40,6 +56,19 @@ public class OI {
 		buttonA.toggleWhenPressed(new FuelDropUp());
 		buttonB.toggleWhenPressed(new FuelDropDown());
 
+		autoPathChooser = new SendableChooser<>();
+		autoPathChooser.addDefault(pathDefault, new AutonomousPathDefault());
+		autoPathChooser.addObject(path1a, new AutonomousPath1a());
+		autoPathChooser.addObject(path1b, new AutonomousPath1b());
+		autoPathChooser.addObject(path1c, new AutonomousPath1c());
+		autoPathChooser.addObject(path2a, new AutonomousPath2a());
+		autoPathChooser.addObject(path2b, new AutonomousPath2b());
+		autoPathChooser.addObject(path2c, new AutonomousPath2c());
+		autoPathChooser.addObject(path3a, new AutonomousPath3a());
+		autoPathChooser.addObject(path3b, new AutonomousPath3b());
+		autoPathChooser.addObject(path3c, new AutonomousPath3c());
+
+		SmartDashboard.putData("Auto choices", autoPathChooser);
 		SmartDashboard.putData("Run Path Default", new AutonomousPathDefault());
 		SmartDashboard.putData("Run Path 1a", new AutonomousPath1a());
 		SmartDashboard.putData("Run Path 1b", new AutonomousPath1b());
