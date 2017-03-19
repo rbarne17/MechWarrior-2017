@@ -1,7 +1,12 @@
 package org.usfirst.frc.team4524.robot.commands;
 
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4524.robot.Robot;
 
@@ -12,67 +17,127 @@ import org.usfirst.frc.team4524.robot.Robot;
 public class DriveForward extends Command {
 	private double driveForwardSpeed;
 	private double distance;
-	private Timer timer = new Timer();
+
+	private PIDController leftMotorController;
+	private PIDController rightMotorController;
+
+	private double tolerance;
 	private double error;
-	private final double kTolerance = 0.1;
 	private final double motorkP = -1.0 / 5.0;
 	private final double gyrokP = .15;
 
 	public DriveForward() {
-		this(10, 0.25);
+		this(5);
 	}
 
 	public DriveForward(double dist) {
-		this(dist, -0.5);
+		this(dist, .1);
 	}
 
-	public DriveForward(double dist, double maxSpeed) {
+	public DriveForward(double distance, double tolerance) {
+		this.distance = distance;
+		this.tolerance = tolerance;
 		requires(Robot.driveTrain);
-		distance = dist;
-		driveForwardSpeed = maxSpeed;
 	}
 
 	@Override
 	protected void initialize() {
 		System.out.println(Robot.driveTrain.getHeading());
 		Robot.driveTrain.reset();
-		timer.reset();
-		timer.start();
-		setTimeout(2.0);
+		PIDSource leftMotorSource = new PIDSource() {
+			@Override
+			public void setPIDSourceType(PIDSourceType pidSource) {
+			}
+
+			@Override
+			public double pidGet() {
+				return Robot.driveTrain.getLeftDistance();
+			}
+
+			@Override
+			public PIDSourceType getPIDSourceType() {
+				return PIDSourceType.kDisplacement;
+			}
+		};
+
+		PIDSource rightMotorSource = new PIDSource() {
+			@Override
+			public void setPIDSourceType(PIDSourceType pidSource) {
+			}
+
+			@Override
+			public double pidGet() {
+				return Robot.driveTrain.getLeftDistance();
+			}
+
+			@Override
+			public PIDSourceType getPIDSourceType() {
+				return PIDSourceType.kDisplacement;
+			}
+		};
+
+		PIDOutput leftMotorOutput = new PIDOutput() {
+			@Override
+			public void pidWrite(double output) {
+				Robot.driveTrain.setLeftMotors(output);
+			}
+		};
+
+		PIDOutput rightMotorOutput = new PIDOutput() {
+			@Override
+			public void pidWrite(double output) {
+				Robot.driveTrain.setRightMotors(output);
+			}
+		};
+		final double Kp = 0.3;
+		final double Ki = 0.0;
+		final double Kd = 0.001;
+
+		leftMotorController = new PIDController(Kp, Ki, Kd, leftMotorSource, leftMotorOutput);
+		rightMotorController = new PIDController(Kp, Ki, Kd, rightMotorSource, rightMotorOutput);
+
+		leftMotorController.setAbsoluteTolerance(tolerance);
+		rightMotorController.setAbsoluteTolerance(tolerance);
+
+		final double MIN_SPEED = 0.1;
+		final double MAX_SPEED = 0.5;
+
+		if (distance > 0) {
+			leftMotorController.setOutputRange(MIN_SPEED, MAX_SPEED);
+			rightMotorController.setOutputRange(MIN_SPEED, MAX_SPEED);
+		} else {
+			leftMotorController.setOutputRange(-MIN_SPEED, -MAX_SPEED);
+			rightMotorController.setOutputRange(-MIN_SPEED, -MAX_SPEED);
+		}
+
+		leftMotorController.setSetpoint(distance);
+		rightMotorController.setSetpoint(distance);
+
+		leftMotorController.enable();
+		rightMotorController.enable();
+
 	}
 
 	@Override
 	protected void execute() {
-		System.out.println("Distance:" + Math.abs(Robot.driveTrain.getDistance()));
-		double angle = Robot.driveTrain.getHeading(); // get current heading
-		System.out.println("Angle:" + angle + ":Correction:" + -angle*gyrokP);
-//		if (Robot.robotChoice == "goodrobot") {
-			error = (distance - Robot.driveTrain.getDistance());
-			if (driveForwardSpeed * motorkP * error >= driveForwardSpeed) {
-				Robot.driveTrain.drive(driveForwardSpeed - (angle * gyrokP), driveForwardSpeed + (angle * gyrokP), "tankDrive");
-			} else {
-				Robot.driveTrain.drive((driveForwardSpeed * motorkP * error)- (angle * gyrokP), (driveForwardSpeed * motorkP * error) +  (angle * gyrokP),
-						"tankDrive");
-			}
-//		} else {
-//			error = (distance - Robot.driveTrain.getDistance());
-//			if (driveForwardSpeed * motorkP * error >= driveForwardSpeed) {
-//				Robot.driveTrain.drive(driveForwardSpeed, angle * gyrokP, "arcadeDrive");
-//			} else {
-//				Robot.driveTrain.drive(driveForwardSpeed * motorkP * error, angle * gyrokP, "arcadeDrive");
-//			}
-//		}
+		SmartDashboard.putNumber("Left Distance", Robot.driveTrain.getLeftDistance());
+		SmartDashboard.putNumber("Right Distance", Robot.driveTrain.getRightDistance());
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return (Math.abs((Robot.driveTrain.getDistance())) >= distance)
-				|| (Math.abs(Robot.driveTrain.getHeading()) >= 10);
+		return leftMotorController.onTarget() && rightMotorController.onTarget();
 	}
 
 	@Override
 	protected void end() {
 		System.out.println(Robot.driveTrain.getHeading());
+		leftMotorController.disable();
+		rightMotorController.disable();
 		Robot.driveTrain.stop();
+	}
+
+	protected void interrupted() {
+		end();
 	}
 }
