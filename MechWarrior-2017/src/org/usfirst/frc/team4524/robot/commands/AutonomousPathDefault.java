@@ -11,6 +11,6 @@ import org.usfirst.frc.team4524.robot.commands.PrintPath;
 public class AutonomousPathDefault extends CommandGroup {
 	public AutonomousPathDefault() {
 		addSequential(new PrintPath("Path Default"));
-		addSequential(new DriveForward(25));
+		addSequential(new DriveForward(20));
 	}
 }
