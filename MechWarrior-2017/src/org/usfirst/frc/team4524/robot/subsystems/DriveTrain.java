@@ -28,9 +28,7 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
-/**
- *
- */
+
 public class DriveTrain extends Subsystem {
 
 	private SpeedController frontLeftMotor;
@@ -76,6 +74,9 @@ public class DriveTrain extends Subsystem {
 			rearRightMotor = new Talon(RobotMap.rearRightMotor);
 			drive = new RobotDrive(frontLeftMotor, frontRightMotor);
 		}
+		
+		gyroCalibrate();
+
 	}
 
 	@Override

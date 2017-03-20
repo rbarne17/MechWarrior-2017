@@ -68,6 +68,8 @@ public class OI {
 		autoPathChooser.addObject(path3b, new AutonomousPath3b());
 		autoPathChooser.addObject(path3c, new AutonomousPath3c());
 
+		SmartDashboard.putData(Robot.driveTrain);
+		SmartDashboard.putData(Robot.fuelPickup);
 		SmartDashboard.putData("Auto choices", autoPathChooser);
 		SmartDashboard.putData("Run Path Default", new AutonomousPathDefault());
 		SmartDashboard.putData("Run Path 1a", new AutonomousPath1a());
