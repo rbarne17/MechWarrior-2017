@@ -67,7 +67,7 @@ public class DriveForward extends Command {
 
 			@Override
 			public double pidGet() {
-				return Robot.driveTrain.getLeftDistance();
+				return Robot.driveTrain.getRightDistance();
 			}
 
 			@Override
@@ -89,7 +89,7 @@ public class DriveForward extends Command {
 				Robot.driveTrain.setRightMotors(output);
 			}
 		};
-		final double Kp = 0.3;
+		final double Kp = 0.5;
 		final double Ki = 0.0;
 		final double Kd = 0.001;
 
