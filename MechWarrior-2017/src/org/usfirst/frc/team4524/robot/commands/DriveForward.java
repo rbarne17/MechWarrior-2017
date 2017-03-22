@@ -31,7 +31,7 @@ public class DriveForward extends Command {
 	}
 
 	public DriveForward(double dist) {
-		this(dist, .1);
+		this(dist, 10);
 	}
 
 	public DriveForward(double distance, double tolerance) {
@@ -86,7 +86,7 @@ public class DriveForward extends Command {
 		PIDOutput rightMotorOutput = new PIDOutput() {
 			@Override
 			public void pidWrite(double output) {
-				Robot.driveTrain.setRightMotors(output);
+				Robot.driveTrain.setRightMotors(-output);
 			}
 		};
 		final double Kp = 0.5;
