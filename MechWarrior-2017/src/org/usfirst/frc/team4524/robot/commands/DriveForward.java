@@ -24,14 +24,14 @@ public class DriveForward extends Command {
 	private double tolerance;
 	private double error;
 	private final double motorkP = -1.0 / 5.0;
-	private final double gyrokP = .15;
+	private final double gyrokP = .10;
 
 	public DriveForward() {
 		this(5);
 	}
 
 	public DriveForward(double dist) {
-		this(dist, 10);
+		this(dist, .1);
 	}
 
 	public DriveForward(double distance, double tolerance) {
@@ -79,14 +79,18 @@ public class DriveForward extends Command {
 		PIDOutput leftMotorOutput = new PIDOutput() {
 			@Override
 			public void pidWrite(double output) {
-				Robot.driveTrain.setLeftMotors(output);
+				double angle = Robot.driveTrain.getHeading(); // get current
+																// heading
+				Robot.driveTrain.setLeftMotors(output - (angle * gyrokP));
 			}
 		};
 
 		PIDOutput rightMotorOutput = new PIDOutput() {
 			@Override
 			public void pidWrite(double output) {
-				Robot.driveTrain.setRightMotors(-output);
+				double angle = Robot.driveTrain.getHeading(); // get current
+																// heading
+				Robot.driveTrain.setRightMotors(-output - (angle * gyrokP));
 			}
 		};
 		final double Kp = 0.5;
@@ -126,7 +130,7 @@ public class DriveForward extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return leftMotorController.onTarget() && rightMotorController.onTarget();
+		return leftMotorController.onTarget() || rightMotorController.onTarget();
 	}
 
 	@Override

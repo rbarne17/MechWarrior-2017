@@ -39,8 +39,8 @@ public class RobotMap {
 
 	public static double leftDistancePerPulse;
 	public static double rightDistancePerPulse;
-	private static final double badLeftDistancePerPulse = .00610;
-	private static final double badRightDistancePerPulse = 0.00435;
+	private static final double badLeftDistancePerPulse = 0.00435;
+	private static final double badRightDistancePerPulse = 0.00610;
 	private static final double goodLeftDistancePerPulse = .00442;
 	private static final double goodRightDistancePerPulse = .00442;
 

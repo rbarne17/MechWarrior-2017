@@ -28,7 +28,6 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
-
 public class DriveTrain extends Subsystem {
 
 	private SpeedController frontLeftMotor;
@@ -50,6 +49,9 @@ public class DriveTrain extends Subsystem {
 	public static final double ENCODER_GEAR_RATIO = 1;
 	public static final double GEAR_RATIO = 10.71 / 1;
 	public static final double FUDGE_FACTOR = 1.0;
+
+	boolean leftEncoderBroken = false;
+	boolean rightEncoderBroken = false;
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -74,7 +76,7 @@ public class DriveTrain extends Subsystem {
 			rearRightMotor = new Talon(RobotMap.rearRightMotor);
 			drive = new RobotDrive(frontLeftMotor, frontRightMotor);
 		}
-		
+
 		gyroCalibrate();
 
 	}
@@ -134,6 +136,9 @@ public class DriveTrain extends Subsystem {
 		gyro.reset();
 		leftEncoder.reset();
 		rightEncoder.reset();
+		leftEncoderBroken = false;
+		rightEncoderBroken = false;
+
 	}
 
 	public void gyroCalibrate() {
@@ -144,10 +149,16 @@ public class DriveTrain extends Subsystem {
 	 * @return The distance driven (average of left and right encoders).
 	 */
 	public double getDistance() {
-		if (Robot.robotChoice == "goodrobot") {
+		if (rightEncoderBroken == false & leftEncoderBroken == false) {
 			return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
+		} else if (leftEncoderBroken == true & rightEncoderBroken == false) {
+			System.out.println("Left Encoder is not working. Please check");
+			return rightEncoder.getDistance();
+		} else if (leftEncoderBroken == false & rightEncoderBroken == true) {
+			System.out.println("Right Encoder is not working. Please check");
+			return leftEncoder.getDistance();
 		} else {
-			return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
+			return 9999;
 		}
 	}
 
@@ -159,9 +170,11 @@ public class DriveTrain extends Subsystem {
 				System.out.println("leftCount-rightCount:" + leftCount + "-" + rightCount);
 				return leftCount + rightCount;
 			} else if (leftCount != 0) {
+				rightEncoderBroken = true;
 				System.out.println("leftCount" + leftCount);
 				return leftCount;
 			} else if (rightCount != 0) {
+				leftEncoderBroken = true;
 				System.out.println("rightCount:" + rightCount);
 				return rightCount;
 			} else {
@@ -209,11 +222,19 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public double getLeftDistance() {
-		return leftEncoder.getDistance();
+		if (leftEncoderBroken == false){
+			return leftEncoder.getDistance();
+		} else {
+			return 9999;
+		}
 	}
 
 	public double getRightDistance() {
-		return rightEncoder.getDistance();
+		if (rightEncoderBroken == false){
+			return rightEncoder.getDistance();
+		} else {
+			return 9999;
+		}
 	}
 
 }
