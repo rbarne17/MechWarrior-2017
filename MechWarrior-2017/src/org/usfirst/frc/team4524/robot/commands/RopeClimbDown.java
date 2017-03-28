@@ -1,37 +1,40 @@
 package org.usfirst.frc.team4524.robot.commands;
+
 import org.usfirst.frc.team4524.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class RopeClimbDown extends Command {
-	
-	private boolean climbDown;
-	
-	public RopeClimbDown(){
+
+	private boolean stop;
+
+	public RopeClimbDown() {
 		requires(Robot.ropeClimber);
-		climbDown = true;
-		
+		stop = false;
+
 	}
-	
-	public RopeClimbDown(boolean down){
-		requires (Robot.ropeClimber);
-		this.climbDown = climbDown;
-		
+
+	public void stop() {
+		this.stop = true;
 	}
-	
+
 	@Override
-	protected void initialize (){
-		
+	protected void initialize() {
+
 	}
+
 	@Override
-	protected void execute(){
-		
+	protected void execute() {
+
 		Robot.ropeClimber.climbDown();
 	}
-	@Override
-	protected boolean isFinished(){
-		return(true);
-	}
-	
 
+	@Override
+	protected boolean isFinished() {
+		return (this.stop);
+	}
+
+	protected void end() {
+		Robot.ropeClimber.stop();
+	}
 }

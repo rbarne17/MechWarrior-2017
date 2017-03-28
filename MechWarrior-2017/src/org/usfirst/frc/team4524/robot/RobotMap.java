@@ -25,7 +25,9 @@ public class RobotMap {
 	public static final int frontRightMotor = 1;
 	public static final int rearRightMotor = 4;
 	public static final int fuelPickupDropoffController = 3 ;
+	public static final int ropeClimbController = 5;
 	public static final int analogInput = 0;
+	public static final int ropeClimberAnalogInput = 1;
 	public static final int leftEncoderChannel1 = 0;
 	public static final int leftEncoderChannel2 = 1;
 	public static final int rightEncoderChannel1 = 3;

@@ -130,18 +130,18 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		encoderDistanceReading = Robot.driveTrain.getDistance();
-		voltage = Robot.fuelPickup.getVoltage();
-		int encoderCount = Robot.driveTrain.getEncoderCount();
-		heading = Robot.driveTrain.getHeading();
-		SmartDashboard.putNumber("Encoder Reading", encoderDistanceReading);
-		System.out.println("Encoder Distance: " + encoderDistanceReading);
-		SmartDashboard.putNumber("Encoder Count", encoderCount);
-		System.out.println("Encoder Count: " + encoderCount);
-		SmartDashboard.putNumber("Heading", heading);
-		System.out.println("Heading: " + heading);
-		SmartDashboard.putNumber("Voltage", voltage);
-		System.out.println("Voltage:" + voltage);
+//		encoderDistanceReading = Robot.driveTrain.getDistance();
+//		voltage = Robot.fuelPickup.getVoltage();
+//		int encoderCount = Robot.driveTrain.getEncoderCount();
+//		heading = Robot.driveTrain.getHeading();
+//		SmartDashboard.putNumber("Encoder Reading", encoderDistanceReading);
+//		System.out.println("Encoder Distance: " + encoderDistanceReading);
+//		SmartDashboard.putNumber("Encoder Count", encoderCount);
+//		System.out.println("Encoder Count: " + encoderCount);
+//		SmartDashboard.putNumber("Heading", heading);
+//		System.out.println("Heading: " + heading);
+//		SmartDashboard.putNumber("Voltage", voltage);
+//		System.out.println("Voltage:" + voltage);
 
 		Scheduler.getInstance().run();
 	}
