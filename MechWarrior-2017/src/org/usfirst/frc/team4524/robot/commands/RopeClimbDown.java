@@ -25,7 +25,6 @@ public class RopeClimbDown extends Command {
 
 	@Override
 	protected void execute() {
-
 		Robot.ropeClimber.climbDown();
 	}
 
