@@ -41,8 +41,8 @@ public class RobotMap {
 	public static double rightDistancePerPulse;
 	private static final double badLeftDistancePerPulse = .00610;
 	private static final double badRightDistancePerPulse = 0.00435;
-	private static final double goodLeftDistancePerPulse = .00442;
-	private static final double goodRightDistancePerPulse = .00442;
+	private static final double goodLeftDistancePerPulse = 0.05304;/*<-- in inches*/       /*.00442 in ft*/
+	private static final double goodRightDistancePerPulse = 0.05304;/*<-- in inches*/     /*00442 in ft*/
 
 	public static void init() {
 		if (!Robot.isReal()) { // Converts to feet
