@@ -1,6 +1,11 @@
 package org.usfirst.frc.team4524.robot.commands;
 
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4524.robot.Robot;
 
@@ -10,64 +15,84 @@ import org.usfirst.frc.team4524.robot.Robot;
  */
 public class TurnHeading extends Command {
 	private double angle;
+	private double tolerance;
 	private double driveForwardSpeed;
 	private double driveReverseSpeed;
 	private double targetHeading;
-	private double error;
-	private final double kTolerance = 0.1;
-	private final double kP = -1.0 / 5.0;
-	private String direction;
-
-	public TurnHeading() {
-		this(90, 0.5, "left");
-	}
+	private PIDController angleMotorController;
 
 	public TurnHeading(double ang) {
-		this(ang, 0.5, "left");
+		this(ang, 5);
 	}
 
-	public TurnHeading(double ang, String dir) {
-		this(ang, 0.5, dir);
-	}
-
-	public TurnHeading(double ang, double maxSpeed) {
-		this(ang, maxSpeed, "left");
-	}
-
-	public TurnHeading(double ang, double maxSpeed, String dir) {
+	public TurnHeading(double angle, double tolerance) {
+		this.angle = angle;
+		this.tolerance = tolerance;
 		requires(Robot.driveTrain);
-		angle = ang;
-		driveForwardSpeed = maxSpeed;
-		driveReverseSpeed = -maxSpeed;
-		direction = dir;
 	}
 
 	@Override
 	protected void initialize() {
 		Robot.driveTrain.reset();
-		targetHeading = Robot.driveTrain.getHeading() + angle;
+
+		PIDSource angleSource = new PIDSource() {
+			@Override
+			public void setPIDSourceType(PIDSourceType pidSource) {
+			}
+
+			@Override
+			public double pidGet() {
+				return Robot.driveTrain.getHeading();
+			}
+
+			@Override
+			public PIDSourceType getPIDSourceType() {
+				return PIDSourceType.kDisplacement;
+			}
+		};
+
+		PIDOutput angleOutput = new PIDOutput() {
+			@Override
+			public void pidWrite(double output) {
+				Robot.driveTrain.rotate(output);
+			}
+		};
+
+		final double Kp = 0.3;
+		final double Ki = 0.01;
+		final double Kd = 0.05;
+
+		angleMotorController = new PIDController(Kp, Ki, Kd, angleSource, angleOutput);
+
+		angleMotorController.setAbsoluteTolerance(tolerance);
+
+		final double MIN_SPEED = 0.5;
+		final double MAX_SPEED = 1.0;
+
+		if (angle > 0) {
+			angleMotorController.setOutputRange(MIN_SPEED, MAX_SPEED);
+		} else {
+			angleMotorController.setOutputRange(-MIN_SPEED, -MAX_SPEED);
+		}
+
+		angleMotorController.setSetpoint(angle);
+		angleMotorController.enable();
 
 	}
 
 	@Override
 	protected void execute() {
-		if (direction == "left") {
-			Robot.driveTrain.drive(driveReverseSpeed, driveForwardSpeed, "tankDrive");
-		} else {
-			Robot.driveTrain.drive(driveForwardSpeed, driveReverseSpeed, "tankDrive");
-		}
+    	SmartDashboard.putNumber("Angle", Robot.driveTrain.getHeading());
 	}
 
 	@Override
 	protected boolean isFinished() {
-		double presentHeading = Robot.driveTrain.getHeading();
-		// return Robot.driveTrain.getHeading() < targetHeading || isTimedOut();
-		return Math.abs(presentHeading) > targetHeading;
+        return angleMotorController.onTarget();
 	}
 
 	@Override
 	protected void end() {
-		System.out.println("Angle at end of turn:" + Robot.driveTrain.getHeading());
+    	angleMotorController.disable();
 		Robot.driveTrain.stop();
 	}
 }
