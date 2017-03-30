@@ -45,13 +45,21 @@ public class RopeClimber extends Subsystem {
 	}
 
 	public void climbUp() {
-		ropeClimbController.set(.5);
+		   this.climbUp(.5);
+	}
+	
+	public void climbUp (double speed) { 
+		ropeClimbController.set(speed);
+				
 	}
 
 	public void climbDown() {
-		ropeClimbController.set(-.5);
+		this.climbDown(-.5);
 	}
 
+	public void climbDown(double speed) {
+		ropeClimbController.set(speed);
+	}
 	public void stop() {
 		ropeClimbController.set(0);
 	}

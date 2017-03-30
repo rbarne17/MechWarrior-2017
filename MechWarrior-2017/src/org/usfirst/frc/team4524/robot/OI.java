@@ -56,9 +56,9 @@ public class OI {
 		buttonA.toggleWhenPressed(new FuelDropUp());
 		buttonB.toggleWhenPressed(new FuelDropDown());
 		buttonX.toggleWhenPressed(new PositionRopeClimber());
-		buttonStart.whileHeld(new RopeClimbUp());
+		buttonStart.whileHeld(new RopeClimbUp(.5));
 		buttonBack.whileHeld(new RopeClimbDown());
-		
+		buttonY.whileHeld(new RopeClimbUp(.25));
 		autoPathChooser = new SendableChooser<>();
 		autoPathChooser.addDefault(pathDefault, new AutonomousPathDefault());
 		autoPathChooser.addObject(path1a, new AutonomousPath1a());
