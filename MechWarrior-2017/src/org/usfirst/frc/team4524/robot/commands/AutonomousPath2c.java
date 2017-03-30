@@ -10,11 +10,8 @@ public class AutonomousPath2c extends CommandGroup {
 	public AutonomousPath2c() {
 		System.out.println("Path 2c");
 		addSequential(new PrintPath("Path 2c"));
-		//Drive Forward ___ feet
 		addSequential(new DriveForward(2));
-		//Turn __ Degrees
 		addSequential(new TurnHeading(90));
-		//Drive forward ___ feet
 		addSequential(new DriveForward(10));
 	}
 }
