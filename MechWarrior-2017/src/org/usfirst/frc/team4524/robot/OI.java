@@ -55,7 +55,10 @@ public class OI {
 		button7.toggleWhenPressed(new DriveWithJoystick(false));
 		buttonA.toggleWhenPressed(new FuelDropUp());
 		buttonB.toggleWhenPressed(new FuelDropDown());
-
+		buttonX.toggleWhenPressed(new PositionRopeClimber());
+		buttonStart.whileHeld(new RopeClimbUp());
+		buttonBack.whileHeld(new RopeClimbDown());
+		
 		autoPathChooser = new SendableChooser<>();
 		autoPathChooser.addDefault(pathDefault, new AutonomousPathDefault());
 		autoPathChooser.addObject(path1a, new AutonomousPath1a());
@@ -68,6 +71,8 @@ public class OI {
 		autoPathChooser.addObject(path3b, new AutonomousPath3b());
 		autoPathChooser.addObject(path3c, new AutonomousPath3c());
 
+		SmartDashboard.putData(Robot.driveTrain);
+		SmartDashboard.putData(Robot.fuelPickup);
 		SmartDashboard.putData("Auto choices", autoPathChooser);
 		SmartDashboard.putData("Run Path Default", new AutonomousPathDefault());
 		SmartDashboard.putData("Run Path 1a", new AutonomousPath1a());

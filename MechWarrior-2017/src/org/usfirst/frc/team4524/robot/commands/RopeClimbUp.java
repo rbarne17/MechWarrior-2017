@@ -5,34 +5,34 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class RopeClimbUp extends Command {
 	
-	private boolean climbUp;
-	
-	public RopeClimbUp(){
+	private boolean stop;
+
+	public RopeClimbUp() {
 		requires(Robot.ropeClimber);
-		climbUp = true;
-		
+		stop = false;
+
 	}
-	
-	public RopeClimbUp(boolean climb){
-		requires (Robot.ropeClimber);
-		this.climbUp = climbUp;
-		
+
+	public void stop() {
+		this.stop = true;
 	}
-	
+
 	@Override
-	protected void initialize (){
-		
-		
+	protected void initialize() {
+
 	}
+
 	@Override
-	protected void execute(){
-		
+	protected void execute() {
 		Robot.ropeClimber.climbUp();
 	}
-	@Override
-	protected boolean isFinished(){
-		return(true);
-	}
-	
 
+	@Override
+	protected boolean isFinished() {
+		return (this.stop);
+	}
+
+	protected void end() {
+		Robot.ropeClimber.stop();
+	}
 }

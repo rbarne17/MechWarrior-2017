@@ -81,9 +81,7 @@ public class DriveTrain extends Subsystem {
 		} else {
 			gyro = new ADXRS450_Gyro();
 			frontLeftMotor = new Talon(RobotMap.frontLeftMotor);
-			rearLeftMotor = new Talon(RobotMap.rearLeftMotor);
 			frontRightMotor = new Talon(RobotMap.frontRightMotor);
-			rearRightMotor = new Talon(RobotMap.rearRightMotor);
 			drive = new RobotDrive(frontLeftMotor, frontRightMotor);
 		}
 	}

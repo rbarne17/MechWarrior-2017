@@ -4,33 +4,25 @@ import org.usfirst.frc.team4524.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class RopeClimbDown extends Command {
+public class PositionRopeClimber extends Command {
 
-	private boolean stop;
-
-	public RopeClimbDown() {
+	public PositionRopeClimber() {
 		requires(Robot.ropeClimber);
-		stop = false;
-
-	}
-
-	public void stop() {
-		this.stop = true;
 	}
 
 	@Override
 	protected void initialize() {
-
 	}
 
 	@Override
 	protected void execute() {
-		Robot.ropeClimber.climbDown();
+		Robot.ropeClimber.climbUp();
+		System.out.println(Robot.ropeClimber.getVoltage());
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return (this.stop);
+		return (Robot.ropeClimber.getVoltage() == 2.5);
 	}
 
 	protected void end() {
