@@ -10,8 +10,8 @@ public class AutonomousPath3c extends CommandGroup {
 	public AutonomousPath3c() {
 		System.out.println("Path 3c");
 		addSequential(new PrintPath("Path 3c"));
-		addSequential(new DriveForward(15.3385416));
-		addSequential(new TurnHeading(60,1));
-		addSequential(new DriveForward(4));
+		addSequential(new DriveForward(55));/* In inches*/
+		addSequential(new TurnHeading(-30,1));
+		addSequential(new DriveForward(72));/* In inches*/
 	}
 }
