@@ -28,7 +28,7 @@ public class FuelPickupDropoff extends Subsystem {
 	
 	public FuelPickupDropoff(){
 		fuelPickupDropoffController = new Talon(RobotMap.fuelPickupDropoffController);
-		analogInput = new AnalogInput(RobotMap.analogInput);
+		analogInput = new AnalogInput(RobotMap.fuelDropoffPickupAnalogInput);
 	}
 	
 	

@@ -26,7 +26,7 @@ public class RopeClimber extends Subsystem {
 	private AnalogInput ropeClimberAnalogInput;
 
 	public RopeClimber() {
-		ropeClimbController = new Talon(RobotMap.ropeClimbController);
+		ropeClimbController = new Talon(RobotMap.ropeClimberController);
 		ropeClimberAnalogInput = new AnalogInput(RobotMap.ropeClimberAnalogInput);
 
 	}
