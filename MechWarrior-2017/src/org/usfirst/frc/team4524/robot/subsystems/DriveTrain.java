@@ -205,8 +205,6 @@ public class DriveTrain extends Subsystem {
 		if (Robot.isReal()) {
 			frontLeftMotor.setInverted(reverse);
 			frontRightMotor.setInverted(reverse);
-			rearLeftMotor.setInverted(reverse);
-			rearRightMotor.setInverted(reverse);
 		} else {
 			drive.setInvertedMotor(MotorType.kFrontLeft, reverse);
 			drive.setInvertedMotor(MotorType.kFrontRight, reverse);
