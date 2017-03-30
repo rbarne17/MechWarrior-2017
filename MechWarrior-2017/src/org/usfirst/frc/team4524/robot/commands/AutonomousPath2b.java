@@ -10,7 +10,5 @@ public class AutonomousPath2b extends CommandGroup {
 	public AutonomousPath2b() {
 		addSequential(new PrintPath("Path 2b"));
 		addSequential(new DriveForward(129.5));
-	
-	
 	}
 }
