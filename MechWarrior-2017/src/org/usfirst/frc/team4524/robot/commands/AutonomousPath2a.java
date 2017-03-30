@@ -10,7 +10,7 @@ public class AutonomousPath2a extends CommandGroup {
 	public AutonomousPath2a() {
 		addSequential(new PrintPath("Path 2a"));
 		addSequential(new DriveForward(2));
-		addSequential(new TurnHeading(45,.6,"left"));
+		addSequential(new TurnHeading(45,1));
 		addSequential(new DriveForward(2.2));
 	}
 }
