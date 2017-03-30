@@ -6,11 +6,15 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RopeClimbUp extends Command {
 	
 	private boolean stop;
-
+	private double speed;
 	public RopeClimbUp() {
 		requires(Robot.ropeClimber);
 		stop = false;
 
+	}
+	public RopeClimbUp (double speed){
+		requires(Robot.ropeClimber);
+		this.speed = speed;
 	}
 
 	public void stop() {
@@ -24,7 +28,7 @@ public class RopeClimbUp extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.ropeClimber.climbUp();
+		Robot.ropeClimber.climbUp(speed);
 	}
 
 	@Override

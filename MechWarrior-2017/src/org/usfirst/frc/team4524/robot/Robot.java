@@ -63,9 +63,13 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(driveTrain);
 		SmartDashboard.putData(fuelPickup);
 
-		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-		camera.setResolution(320, 240);
-		camera.setFPS(15);
+		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
+		camera1.setResolution(320, 240);
+		camera1.setFPS(15);
+		
+		UsbCamera camera2 = CameraServer.getInstance().startAutomaticCapture();
+		camera2.setResolution(320, 240);
+		camera2.setFPS(15);
 		
 	}
 	/**
