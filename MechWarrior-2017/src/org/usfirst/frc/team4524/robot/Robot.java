@@ -23,7 +23,8 @@ public class Robot extends IterativeRobot {
 	public static FuelPickupDropoff fuelPickup;
 	public static RopeClimber ropeClimber;
 	public static DriveTrain driveTrain;
-	public static Camera camera;
+	public static Camera camera1;
+	public static Camera camera2;
 	
 	// what robot are we using?
 	public static final String robotChoice = "goodrobot"; // pacgoat,gearbots,badrobot,goodrobot
@@ -48,7 +49,8 @@ public class Robot extends IterativeRobot {
 		fuelPickup = new FuelPickupDropoff();
 		ropeClimber = new RopeClimber();
 		driveTrain = new DriveTrain();
-		camera = new Camera();
+		camera1 = new Camera();
+		camera2 = new Camera();
 
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be

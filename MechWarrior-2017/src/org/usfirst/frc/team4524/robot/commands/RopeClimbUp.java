@@ -33,7 +33,7 @@ public class RopeClimbUp extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.ropeClimber.climbUp();
+		Robot.ropeClimber.climbUp(speed);
 	}
 
 	@Override
